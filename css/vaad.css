@@ -1,0 +1,82 @@
+/* aljskajs */
+
+
+
+
+body {
+    direction: rtl;
+}
+
+.main-page {
+  background : url(/images/body.jpg) repeat-y;
+}
+
+.main-content {
+  margin-right : 10px;
+  min-height: 600px;
+}
+
+
+.header {
+    height: 70px;
+    background: url(/images/menu.jpg) no-repeat;
+        
+}
+
+.footer {
+    height: 43px;
+    background: url(/images/footer.png) no-repeat;
+    padding-top: 30px;        
+}
+
+.sidebar {
+    padding-right: 10px;
+}
+
+.dashboard {
+    height: 40px;
+}
+
+.search {
+    background: url(/images/search.jpg) no-repeat;
+}
+
+.search input {
+    margin-right: 40px;
+    border: none;
+    background-color: #B5B085;
+}
+
+.page-title {
+    font-family : Dorian;
+    font-size : 18px;
+    padding-top : 5px;
+}
+
+
+.box {
+    background: url("/images/wrapper.png") no-repeat scroll 0 0 transparent;
+    border: 1px solid #CBC3BB;
+    list-style: none outside none;
+    padding: 0;
+    width: 100%;
+}
+
+.box h4 {
+    background: none repeat scroll 0 0 #725334;
+    color: #CBC3BB;
+    font-family: Dorian;
+    font-size: 16px;
+    margin: 0;
+    text-align: center;
+}
+
+
+
+
+@font-face{
+  font-family: 'Dorian';
+  src: url('KtavYadCLMBoldItalic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
