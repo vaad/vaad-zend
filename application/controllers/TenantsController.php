@@ -1,21 +1,26 @@
 <?php
 
-class TenantsController extends Zend_Controller_Action
+class TenantsController extends Vaad_Controller_Action
 {
-
+    
     public function init()
     {
-        /* Initialize action controller here */
+        $this->view->topPageTitle = 'דיירים';
     }
 
     public function indexAction()
     {
-        // action body
+        $tbl = new Vaad_DbTable_Tenants();
+        $this->view->rows = $tbl->fetchAll(null,'tnt_app_num Asc');
+        
+        $page = $this->getPage();
+        $this->setPaginator($this->view->rows);
+        
     }
 
     public function createAction()
     {
-        // action body
+        $tbl = new Vaad_DbTable_Tenants();        
     }
 
     public function listAction()

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : mainmenu.xml
+    Created on : August 11, 2011, 8:20 PM
+    Author     : eli
+    Description:
+        Purpose of the document follows.
+-->
+
+<configdata>
+  <nav>
+    
+
+    <tenants>
+      <label>דיירים</label>
+      <uri>/tenants</uri>
+    </tenants>
+
+    <tickets>
+      <label>תקלות</label>
+      <uri>/tickets</uri>
+    </tickets>
+
+    <contacts>
+      <label>בעלי מקצוע</label>
+      <uri>/contacts</uri>
+    </contacts>
+
+ 
+    <projects>
+      <label>פרוייקטים</label>
+      <uri>/projects</uri>
+    </projects>
+
+    <lobby>
+      <id>lobby</id>
+      <label>לובי</label>
+      <uri>/</uri>
+    </lobby>
+
+    <polls>
+      <label>הצבעות</label>
+      <uri>/polls</uri>
+    </polls>
+
+    <ads>
+      <label>לוח מודעות</label>
+      <uri>/ads</uri>
+    </ads>
+
+    <forums>
+      <label>פורומים</label>
+      <uri>/forums</uri>
+    </forums>
+
+    <admin>
+      <label>ניהול</label>
+      <uri>/admin</uri>
+    </admin>
+
+    <help>
+      <label>
+  עזרה
+      </label>
+        
+      <uri>/help</uri>
+    </help>
+
+  </nav>
+
+</configdata>

@@ -8,19 +8,19 @@ body {
 }
 
 .main-page {
-  background : url(/images/body.jpg) repeat-y;
+    background : url(/images/body.jpg) repeat-y;
 }
 
 .main-content {
-  margin-right : 10px;
-  min-height: 600px;
+    margin-right : 10px;
+    min-height: 600px;
 }
 
 
 .header {
     height: 70px;
     background: url(/images/menu.jpg) no-repeat;
-        
+
 }
 
 .footer {
@@ -53,12 +53,30 @@ body {
     padding-top : 5px;
 }
 
+.pagination {
+    padding-top: 20px;
+}
+.pagination a , .current {
+    border: 1px solid #9AAFE5;
+    color: #0E509E;
+    font-weight: bold;
+    padding: 1px 6px;
+    text-decoration: none;
+}
+
+.pagination .current {
+    background-color: #2E6AB1;
+}
+
 
 .box {
-    background: url("/images/wrapper.png") no-repeat scroll 0 0 transparent;
+    /* background: url("/images/wrapper.png") no-repeat scroll 0 0 transparent; */
+    padding: 0;
+    /*padding-right: 7px;
+    padding-left: 7px;*/
+    background-color: #FADA6F;
     border: 1px solid #CBC3BB;
     list-style: none outside none;
-    padding: 0;
     width: 100%;
 }
 
@@ -71,12 +89,42 @@ body {
     text-align: center;
 }
 
+.box .content {
+    padding: 7px;
+    padding-top: 0;
+}
+
+#logo {
+    font-family: Dorian;
+    padding-right: 10px;
+}
+#mainmenu {
+    font-family: Dorian;
+}
+
+#mainmenu ul li a {
+    background-color: transparent;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 5px 8px;
+    text-decoration: none;
+}
+
+#mainmenu ul {
+    margin: 0;
+    padding: 20px 20px 5px;
+}
+
+#mainmenu ul li {
+    display: inline;
+}
 
 
 
 @font-face{
-  font-family: 'Dorian';
-  src: url('KtavYadCLMBoldItalic.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
+    font-family: 'Dorian';
+    src: url('KtavYadCLMBoldItalic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }

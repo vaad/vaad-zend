@@ -1,46 +1,80 @@
 <?php
 
-class AuthController extends Zend_Controller_Action
-{
+class AuthController extends Zend_Controller_Action {
 
-    public function init()
-    {
+    public function init() {
         /* Initialize action controller here */
     }
 
-    public function indexAction()
-    {
+    private function isValid($post) {
+        if (empty($post['email']))
+            return false;
+        if (empty($post['password']))
+            return false;
+        return true;
+    }
+
+    public function indexAction() {
         // action body
     }
 
-    public function loginAction()
-    {
+    public function loginAction() {
+        $this->view->topPageTitle = "כניסה למערכת";
+        $errmsg = '';
+        if ($this->getRequest()->isPost()) {
+            if ($this->isValid($_POST)) {
+                $data = $_POST;
+                $db = Zend_Db_Table::getDefaultAdapter();
+                $authAdapter = new Zend_Auth_Adapter_DbTable($db, 'tenants', 'tnt_email', 'tnt_password');
+                $authAdapter->setIdentity($data['email']);
+                $authAdapter->setCredential(md5($data['password']));
+                $result = $authAdapter->authenticate();
+                if ($result->isValid()) {
+                    $uData = $authAdapter->getResultRowObject(
+                            array('id', 'tnt_is_active', 'tnt_first_name', 'tnt_last_name', 'tnt_email',
+                                'tnt_is_vaad', 'tnt_is_admin'));
+                    $isActive = $uData->tnt_is_active;
+                    $isActive = true;
+                    if ($isActive) {
+                        $role = 'tenant';
+                        if ($uData->tnt_is_vaad)
+                            $role = 'vaad';
+                        if ($uData->tnt_is_admin)
+                            $role = 'admin';
+                        $uData->role = $role;
+                        $auth = Zend_Auth::getInstance();
+                        $storage = $auth->getStorage();
+                        $storage->write($uData);
+                        if ($act == 'thankyou') {
+                            $cont = 'index';
+                            $act = 'index';
+                        }
+                        return $this->_redirect("/$cont/$act");
+                    } else {
+                        $errmsg = "מייל או סיסמא אינם נכונים. או שעדיין לא קיבלת הרשאה להיכנס מהוועד.";
+                    }
+                } else {
+                    $errmsg = "מייל או סיסמא אינם נכונים. או שעדיין לא קיבלת הרשאה להיכנס מהוועד.";
+                }
+            } else {
+                $errmsg = "אנא הכנס כתובת מייל וסיסמא תקפים";
+            }
+            echo $errmsg;
+        }
+    }
+
+    public function logoutAction() {
+        Zend_Auth::getInstance()->ClearIdentity();
+        return $this->_redirect("/");
+    }
+
+    public function registerAction() {
         // action body
     }
 
-    public function logoutAction()
-    {
+    public function chngpassAction() {
         // action body
     }
-
-    public function registerAction()
-    {
-        // action body
-    }
-
-    public function chngpassAction()
-    {
-        // action body
-    }
-
 
 }
-
-
-
-
-
-
-
-
 

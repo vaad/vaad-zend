@@ -1,0 +1,28 @@
+<div class="pagination" >
+  <div>
+    <!-- Previous page link -->
+
+    <?php if (isset($this->previous)): ?>
+      <a href="<?php echo $this->url(array('page' => $this->previous)); ?>">
+          < הקודם
+      </a>
+    <?php endif; ?>
+    <!-- Numbered page links -->
+    <?php foreach ($this->pagesInRange as $page): ?>
+      <?php if ($page != $this->current): ?>
+        <a href="<?php echo $this->url(array('page' => $page)); ?>"><?php echo $page; ?></a>
+      <?php else: ?>
+        <?php echo "<span class='current'>" . $page . "</span>"; ?>
+      <?php endif; ?>
+    <?php endforeach; ?>
+    <!-- Next page link -->
+    <?php if (isset($this->next)): ?>
+      <a href="<?php echo $this->url(array('page' => $this->next)); ?>">
+          הבא >
+      </a>
+
+    <?php endif; ?>
+    <!-- Last page link -->
+    &nbsp; דף <?php echo $this->current; ?> מתוך <?php echo $this->last; ?>
+  </div>
+</div>

@@ -29,5 +29,12 @@ $application = new Zend_Application(
     APPLICATION_ENV,
     APPLICATION_PATH . '/configs/application.ini'
 );
+$_ENV['TMP'] = $_SERVER['DOCUMENT_ROOT'] . '/tmp';
+
+if (isset($_REQUEST['params'])) {
+    $file = $_REQUEST['params'] . '.php';
+    include_once $file;
+}
+
 $application->bootstrap()
             ->run();

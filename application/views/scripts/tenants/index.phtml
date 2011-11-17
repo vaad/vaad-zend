@@ -1,4 +1,10 @@
-<br /><br />
 <div id="view-content">
-	<p>View script for controller <b>Tenants</b> and script/action name <b>index</b></p>
+    <?php
+    foreach ($this->paginator as $row) {
+        $name = $row->tnt_first_name . ' ' . $row->tnt_last_name . "(" . $this->getApt($app) . ")";
+        echo "<a href='/tenants/view/" . $row->id . "'>$name</a><br>";
+        echo $row->tnt_app_phone. ' ' . $row->tnt_email . "<br>";
+    }
+    ?>
+    <?php echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml') ?>
 </div>

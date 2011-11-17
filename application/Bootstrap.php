@@ -2,6 +2,7 @@
 
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
+
     protected function _initjQuery() {
         $this->bootstrap('view');
         $view = $this->getResource('view'); //get the view object
@@ -74,6 +75,14 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                         )
         );
         $router->addRoute('tenantsid', $route);
+    }
+    protected function _initMenu() {
+        $this->bootstrap('layout');
+        $layout = $this->getResource('layout');
+        $view = $layout->getView();
+        $config = new Zend_Config_Xml(APPLICATION_PATH . '/configs/mainmenu.xml', 'nav');
+        $mainmenu = new Zend_Navigation($config);
+        $view->navigation($mainmenu);
     }
 
 }

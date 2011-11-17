@@ -15,31 +15,25 @@
     </head>
     <body>
         <div class='container main-page'>
-            <div class="span-24 header last">
-                akljhsdjkahsdjkahs
+            <div id="mainmenu" class="span-24 header last">
+                <?php echo $this->navigation()->menu(); ?>
             </div>
             <div class="span-24 dashboard">
                 <div class="span-6 search left">
                     <form method="post">
-                        <input size="15" type="text" value="חיפוש..." />
+                        <input size="15" type="text" placeholder="חיפוש..." />
                     </form>
                 </div>
                 <div class="span-12 left  page-title">
-                    ברוכים הבאים
+                    <?php if (isset($this->topPageTitle)) echo $this->topPageTitle; ?>
                 </div>
+                <div id="logo"><?php echo $this->BldName(); ?></div>
             </div>
-            <div class="span-3 sidebar right">
+            <div class="span-4 sidebar right">
                 <?php echo $this->myDetails(); ?>
             </div>
             <div class='main-content span-19  left' > 
                 <?php echo $this->layout()->content; ?>
-                <div class="span-19 last break"> <hr> </div>
-                <div class="span-9 showgrid left"> 
-                    sdlfjskldjfklsjd a;lkl;aksdl;
-                    askdl;aksdl;kal;s d;alskd a;sdkl;ask
-                    as;ldkl;aksdl;aks ;laksd ;askd a;sk
-                </div>
-                <div class="span-9 showgrid right"> kldfjksdjfsldjf sd</div>
             </div>
             <div class="footer span-24">
                 alkjklasjkl
