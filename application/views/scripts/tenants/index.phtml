@@ -1,7 +1,8 @@
 <div id="view-content">
     <?php
     foreach ($this->paginator as $row) {
-        $name = $row->tnt_first_name . ' ' . $row->tnt_last_name . "(" . $this->getApt($app) . ")";
+        $app = $row->tnt_app_num;
+        $name = $row->tnt_first_name . ' ' . $row->tnt_last_name . " ( דירה " . $this->getApt($app) . " )";
         echo "<a href='/tenants/view/" . $row->id . "'>$name</a><br>";
         echo $row->tnt_app_phone. ' ' . $row->tnt_email . "<br>";
     }

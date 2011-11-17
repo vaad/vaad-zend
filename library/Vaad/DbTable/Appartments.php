@@ -11,12 +11,16 @@
  * @author eli
  */
 class Vaad_DbTable_Appartments extends Vaad_DbTable_Abstract {
+
     protected $_name = 'appartments';
-    
+
     public function getAptNum($id) {
-        
+        $row = $this->fetchRow('id=' . $id);
+        if ($row)
+            return $row->app_num;
+        return -1;
     }
-    
+
 }
 
 ?>
