@@ -1,0 +1,12 @@
+<div id="view-content">
+    <?php
+    foreach ($this->paginator as $row) {
+	//echo "<span class='postit view'>\n";
+        $title = $row->title;
+        echo "<a href='/posts/view/" . $row->id . "'>$title</a><br>";
+	//echo "</span>\n";
+    }
+    ?>
+    <div class='clear'></div>
+    <?php echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml') ?>
+</div>

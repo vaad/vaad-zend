@@ -2,7 +2,6 @@
 
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 
-
     protected function _initjQuery() {
         $this->bootstrap('view');
         $view = $this->getResource('view'); //get the view object
@@ -15,6 +14,35 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                 ->uiEnable(); //enable ui
 
         return $view;
+    }
+
+    protected function _initTranslate() {
+        date_default_timezone_set('Asia/Jerusalem');
+        // We use the Swedish locale as an example
+        $locale = new Zend_Locale('he_IL');
+        Zend_Registry::set('Zend_Locale', $locale);
+
+        // Create Session block and save the locale
+        $session = new Zend_Session_Namespace('session');
+        $langLocale = isset($session->lang) ? $session->lang : $locale;
+
+
+        $translate = new Zend_Translate(
+                        array(
+                            'adapter' => 'array',
+                            'content' => APPLICATION_PATH . DIRECTORY_SEPARATOR . 'languages/he.php',
+                            'locale' => 'he_IL',
+                            'delimiter' => ';',
+                            'disableNotices' => false,
+                            'scan' => Zend_Translate::LOCALE_DIRECTORY
+                        )
+        );
+
+
+        //$translate->setLocale($langLocale); // Use this if you only want to load the translation matching current locale, experiment.
+        // Save it for later
+        $registry = Zend_Registry::getInstance();
+        $registry->set('Zend_Translate', $translate);
     }
 
     public function _initMyAutoloading() {
@@ -75,7 +103,20 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                         )
         );
         $router->addRoute('tenantsid', $route);
+
+        $route = new Zend_Controller_Router_Route(
+                        'send/to/:mailto',
+                        array(
+                            'controller' => 'send',
+                            'action' => 'index',
+                        ),
+                        array(
+                            'mailto' => '[^\@]+\@.*'
+                        )
+        );
+        $router->addRoute('tenantsid', $route);
     }
+
     protected function _initMenu() {
         $this->bootstrap('layout');
         $layout = $this->getResource('layout');

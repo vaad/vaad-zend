@@ -28,7 +28,8 @@ class Vaad_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract {
         $acl->add(new Zend_Acl_Resource('tasks'));
         $acl->add(new Zend_Acl_Resource('forums'));
         $acl->add(new Zend_Acl_Resource('transactions'));
-        $acl->add(new Zend_Acl_Resource('incomes'));
+        $acl->add(new Zend_Acl_Resource('incomes'));      
+        $acl->add(new Zend_Acl_Resource('send'));
         $acl->add(new Zend_Acl_Resource('accounts'));
 
         $acl->allow('guest', 'auth', array('login', 'thankyou'));
@@ -47,6 +48,7 @@ class Vaad_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract {
         $acl->allow('tenant', 'projects', array('index', 'view'));
         $acl->allow('tenant', 'polls', array('index', 'vote'));
         $acl->allow('tenant', 'ads', array('index', 'add', 'view', 'edit_mine'));
+        $acl->allow('tenant', 'send', null);
         $acl->allow('tenant', 'forums', array('index', 'add', 'view', 'edit_mine'));
         $acl->allow('tenant', 'tasks', array('index', 'add', 'view', 'edit_mine'));
 

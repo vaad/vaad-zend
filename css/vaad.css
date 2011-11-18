@@ -13,7 +13,7 @@ body {
 
 .main-content {
     margin-right : 10px;
-    min-height: 600px;
+    min-height: 500px;
 }
 
 
@@ -51,6 +51,8 @@ body {
     font-family : Dorian;
     font-size : 18px;
     padding-top : 5px;
+    border-bottom: 3px solid #B3E9AF;
+    padding-right: 20px;
 }
 
 .pagination {
@@ -120,6 +122,53 @@ body {
     display: inline;
 }
 
+.postit {
+    -moz-transform: rotate(-5deg);
+    background-color: #D2E6B9;
+    float: right;
+    font-family: Dorian;
+    height: 130px;
+    margin-bottom: 20px;
+    margin-left: 15px;
+    padding-right: 10px;
+    width: 190px;
+}
+.postit {
+    -moz-transform: rotate(-6deg);
+}
+.postit:nth-child(2n+1) {
+    -moz-transform: rotate(4deg);
+    background: none repeat scroll 0 0 #EDC3B6;
+    position: relative;
+    top: 5px;
+}
+.postit:nth-child(3n) {
+    -moz-transform: rotate(-3deg);
+    background: none repeat scroll 0 0 #BED2A5;
+    position: relative;
+    top: -5px;
+}
+.postit:nth-child(5n) {
+    -moz-transform: rotate(5deg);
+    background: none repeat scroll 0 0 #BED2A5;
+    position: relative;
+    top: -10px;
+}
+.postit:hover, .postit:focus {
+    -moz-transform: scale(1.25);
+    box-shadow: 10px 10px 7px rgba(0, 0, 0, 0.698);
+    position: relative;
+    z-index: 5;
+}
+.postit h4 {
+    font-family: Dorian;
+    font-size: 12px;
+    padding-right: 10px;
+    padding-top: 10px;
+}
+.postit a {
+    color: #0099FF;
+}
 
 
 @font-face{

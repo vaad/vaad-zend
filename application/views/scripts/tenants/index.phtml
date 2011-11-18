@@ -1,11 +1,18 @@
 <div id="view-content">
     <?php
     foreach ($this->paginator as $row) {
+	echo "<span class='postit view'>\n";
         $app = $row->tnt_app_num;
+	$email = $row->tnt_email;
+	if (!empty($email)) {
+		$email = "<a href='/send/to/$email'>$email</a>";
+	}	
         $name = $row->tnt_first_name . ' ' . $row->tnt_last_name . " ( דירה " . $this->getApt($app) . " )";
         echo "<a href='/tenants/view/" . $row->id . "'>$name</a><br>";
-        echo $row->tnt_app_phone. ' ' . $row->tnt_email . "<br>";
+        echo $row->tnt_app_phone. ' ' . $email . "<br>";
+	echo "</span>\n";
     }
     ?>
+    <div class='clear'></div>
     <?php echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml') ?>
 </div>

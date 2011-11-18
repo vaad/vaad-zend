@@ -1,17 +1,17 @@
 <?php
 
-class TenantsController extends Vaad_Controller_Action
+class PostsController extends Vaad_Controller_Action
 {
     
     public function init()
     {
-        $this->view->topPageTitle = 'דיירים';
+        $this->view->topPageTitle = 'הודעות וועד/פוסטים';
     }
 
     public function indexAction()
     {
-        $tbl = new Vaad_DbTable_Tenants();
-        $this->view->rows = $tbl->fetchAll(null,'tnt_app_num Asc');
+        $tbl = new Vaad_DbTable_Posts();
+        $this->view->rows = $tbl->fetchAll(null,'create_time Desc');
         
         $page = $this->getPage();
         $this->setPaginator($this->view->rows);
@@ -20,13 +20,7 @@ class TenantsController extends Vaad_Controller_Action
 
     public function createAction()
     {
-        $this->view->topPageTitle = 'הוספת דייר';
-        $tbl = new Vaad_DbTable_Tenants();  
-        $row = $tbl->createRow();
-        $form = new Vaad_Form_Tenant();
-        $form->populate($row->toArray());
-        $this->view->form = $form;
-        
+        $tbl = new Vaad_DbTable_Posts();        
     }
 
     public function listAction()
