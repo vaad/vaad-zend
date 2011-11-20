@@ -39,6 +39,7 @@ body {
 
 .search {
     background: url(/images/search.jpg) no-repeat;
+    height: 50px;
 }
 
 .search input {
