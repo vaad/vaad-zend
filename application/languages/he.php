@@ -183,7 +183,7 @@ return array(
     'tnt_password' => 'סיסמת כניסה',
     'cnf_password' => 'אימות סיסמא',
     'tnt_picture' => 'תמונה',
-    'tnt_prev_debt' => 'יתרת כניסה',
+    'tnt_prev_debt' => 'חוב קודם',
     'trn_amount' => 'סכום',
     'trn_date' => 'תאריך',
     'trn_debit' => 'הוצאה?',

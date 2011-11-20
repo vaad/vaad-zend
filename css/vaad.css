@@ -170,6 +170,26 @@ body {
     color: #0099FF;
 }
 
+fieldset {
+    border: none;
+    margin: 0 0 1.5em;
+    padding: 0 1.4em 0;
+}
+#fieldset-left , #fieldset-right {
+    width : 45%;
+    float: right;
+    border : none;
+}
+
+#fieldset-bottom {
+    clear : both;
+}
+label {
+    width : 20%;
+    float: right;
+    padding-top: 4px;
+}
+
 
 @font-face{
     font-family: 'Dorian';

@@ -1,26 +1,253 @@
 <?php
 
-class Vaad_Form_Tenant extends Zend_Form {
+class Vaad_Form_Tenant extends ZendX_JQuery_Form {
 
     public function __construct($options = null) {
         parent::__construct($options);
         $this->setAction($options['action'])->setMethod('post');
+        $id = $this->createElement('hidden', 'id');
+        $this->addElement($id);
+        $submit = new Zend_Form_Element_Submit('submit');
+        $this->addElement($submit);
+        $back = new Zend_Form_Element_Submit('back');
+        $this->addElement($back);
+        $save = new Zend_Form_Element_Submit('save');
+        $this->addElement($save);
+        $delete = new Zend_Form_Element_Submit('delete');
+        $this->addElement($delete);
+        $bld_id = $this->createElement('hidden', 'bld_id');
+        $this->addElement($bld_id);
+        $submit = new Zend_Form_Element_Submit('submit');
+        $this->addElement($submit);
+        $back = new Zend_Form_Element_Submit('back');
+        $this->addElement($back);
+        $save = new Zend_Form_Element_Submit('save');
+        $this->addElement($save);
+        $delete = new Zend_Form_Element_Submit('delete');
+        $this->addElement($delete);
+        $tnt_is_active = $this->createElement('checkbox', 'tnt_is_active', array('placeholder' => 'bool', 'label' => 'tnt_is_active'));
+        $this->addElement($tnt_is_active);
+        $submit = new Zend_Form_Element_Submit('submit');
+        $this->addElement($submit);
+        $back = new Zend_Form_Element_Submit('back');
+        $this->addElement($back);
+        $save = new Zend_Form_Element_Submit('save');
+        $this->addElement($save);
+        $delete = new Zend_Form_Element_Submit('delete');
+        $this->addElement($delete);
+        $tnt_app_num = $this->createElement('text', 'tnt_app_num', array('placeholder' => 'int4', 'label' => 'tnt_app_num'));
+        $this->addElement($tnt_app_num);
+        $submit = new Zend_Form_Element_Submit('submit');
+        $this->addElement($submit);
+        $back = new Zend_Form_Element_Submit('back');
+        $this->addElement($back);
+        $save = new Zend_Form_Element_Submit('save');
+        $this->addElement($save);
+        $delete = new Zend_Form_Element_Submit('delete');
+        $this->addElement($delete);
+        $tnt_first_name = $this->createElement('text', 'tnt_first_name', array('placeholder' => 'varchar', 'label' => 'tnt_first_name'));
+        $this->addElement($tnt_first_name);
+        $submit = new Zend_Form_Element_Submit('submit');
+        $this->addElement($submit);
+        $back = new Zend_Form_Element_Submit('back');
+        $this->addElement($back);
+        $save = new Zend_Form_Element_Submit('save');
+        $this->addElement($save);
+        $delete = new Zend_Form_Element_Submit('delete');
+        $this->addElement($delete);
+        $tnt_last_name = $this->createElement('text', 'tnt_last_name', array('placeholder' => 'varchar', 'label' => 'tnt_last_name'));
+        $this->addElement($tnt_last_name);
+        $submit = new Zend_Form_Element_Submit('submit');
+        $this->addElement($submit);
+        $back = new Zend_Form_Element_Submit('back');
+        $this->addElement($back);
+        $save = new Zend_Form_Element_Submit('save');
+        $this->addElement($save);
+        $delete = new Zend_Form_Element_Submit('delete');
+        $this->addElement($delete);
+        $tnt_password = $this->createElement('text', 'tnt_password', array('placeholder' => 'varchar', 'label' => 'tnt_password'));
+        $this->addElement($tnt_password);
+        $submit = new Zend_Form_Element_Submit('submit');
+        $this->addElement($submit);
+        $back = new Zend_Form_Element_Submit('back');
+        $this->addElement($back);
+        $save = new Zend_Form_Element_Submit('save');
+        $this->addElement($save);
+        $delete = new Zend_Form_Element_Submit('delete');
+        $this->addElement($delete);
+        $tnt_birthday = new ZendX_JQuery_Form_Element_DatePicker('tnt_birthday');
+        $tnt_birthday->setJQueryParams(array(
+            'dateFormat' => 'dd-mm-yy',
+            'timeFormat' => 'hh:mm:ss'
+        ));
+        $tnt_birthday->setAttrib('size', '10')
+                ->setLabel('tnt_birthday')
+                ->setValue(date('Y-m-d H:i:s'));
+        $this->addElement($tnt_birthday);
+        $submit = new Zend_Form_Element_Submit('submit');
+        $this->addElement($submit);
+        $back = new Zend_Form_Element_Submit('back');
+        $this->addElement($back);
+        $save = new Zend_Form_Element_Submit('save');
+        $this->addElement($save);
+        $delete = new Zend_Form_Element_Submit('delete');
+        $this->addElement($delete);
+        $tnt_email = $this->createElement('text', 'tnt_email', array('placeholder' => 'varchar', 'label' => 'tnt_email'));
+        $this->addElement($tnt_email);
+        $submit = new Zend_Form_Element_Submit('submit');
+        $this->addElement($submit);
+        $back = new Zend_Form_Element_Submit('back');
+        $this->addElement($back);
+        $save = new Zend_Form_Element_Submit('save');
+        $this->addElement($save);
+        $delete = new Zend_Form_Element_Submit('delete');
+        $this->addElement($delete);
+        $tnt_app_phone = $this->createElement('text', 'tnt_app_phone', array('placeholder' => 'varchar', 'label' => 'tnt_app_phone'));
+        $this->addElement($tnt_app_phone);
+        $submit = new Zend_Form_Element_Submit('submit');
+        $this->addElement($submit);
+        $back = new Zend_Form_Element_Submit('back');
+        $this->addElement($back);
+        $save = new Zend_Form_Element_Submit('save');
+        $this->addElement($save);
+        $delete = new Zend_Form_Element_Submit('delete');
+        $this->addElement($delete);
+        $tnt_picture = $this->createElement('text', 'tnt_picture', array('placeholder' => 'varchar', 'label' => 'tnt_picture'));
+        $this->addElement($tnt_picture);
+        $submit = new Zend_Form_Element_Submit('submit');
+        $this->addElement($submit);
+        $back = new Zend_Form_Element_Submit('back');
+        $this->addElement($back);
+        $save = new Zend_Form_Element_Submit('save');
+        $this->addElement($save);
+        $delete = new Zend_Form_Element_Submit('delete');
+        $this->addElement($delete);
+        $tnt_mobile = $this->createElement('text', 'tnt_mobile', array('placeholder' => 'varchar', 'label' => 'tnt_mobile'));
+        $this->addElement($tnt_mobile);
+        $submit = new Zend_Form_Element_Submit('submit');
+        $this->addElement($submit);
+        $back = new Zend_Form_Element_Submit('back');
+        $this->addElement($back);
+        $save = new Zend_Form_Element_Submit('save');
+        $this->addElement($save);
+        $delete = new Zend_Form_Element_Submit('delete');
+        $this->addElement($delete);
+        $tnt_entry_date = new ZendX_JQuery_Form_Element_DatePicker('tnt_entry_date');
+        $tnt_entry_date->setJQueryParams(array(
+            'dateFormat' => 'dd-mm-yy',
+            'timeFormat' => 'hh:mm:ss'
+        ));
+        $tnt_entry_date->setAttrib('size', '10')
+                ->setLabel('tnt_entry_date')
+                ->setValue(date('Y-m-d H:i:s'));
+        $this->addElement($tnt_entry_date);
+        $submit = new Zend_Form_Element_Submit('submit');
+        $this->addElement($submit);
+        $back = new Zend_Form_Element_Submit('back');
+        $this->addElement($back);
+        $save = new Zend_Form_Element_Submit('save');
+        $this->addElement($save);
+        $delete = new Zend_Form_Element_Submit('delete');
+        $this->addElement($delete);
+        $tnt_prev_debt = new Vaad_Form_Element_Currency('tnt_prev_debt', array('label' => 'tnt_prev_debt'));
+        $this->addElement($tnt_prev_debt);
+        $submit = new Zend_Form_Element_Submit('submit');
+        $this->addElement($submit);
+        $back = new Zend_Form_Element_Submit('back');
+        $this->addElement($back);
+        $save = new Zend_Form_Element_Submit('save');
+        $this->addElement($save);
+        $delete = new Zend_Form_Element_Submit('delete');
+        $this->addElement($delete);
+        $tnt_occupation = $this->createElement('text', 'tnt_occupation', array('placeholder' => 'varchar', 'label' => 'tnt_occupation'));
+        $this->addElement($tnt_occupation);
+        $submit = new Zend_Form_Element_Submit('submit');
+        $this->addElement($submit);
+        $back = new Zend_Form_Element_Submit('back');
+        $this->addElement($back);
+        $save = new Zend_Form_Element_Submit('save');
+        $this->addElement($save);
+        $delete = new Zend_Form_Element_Submit('delete');
+        $this->addElement($delete);
+        $tnt_is_vaad = $this->createElement('checkbox', 'tnt_is_vaad', array('placeholder' => 'bool', 'label' => 'tnt_is_vaad'));
+        $this->addElement($tnt_is_vaad);
+        $submit = new Zend_Form_Element_Submit('submit');
+        $this->addElement($submit);
+        $back = new Zend_Form_Element_Submit('back');
+        $this->addElement($back);
+        $save = new Zend_Form_Element_Submit('save');
+        $this->addElement($save);
+        $delete = new Zend_Form_Element_Submit('delete');
+        $this->addElement($delete);
+        $tnt_is_owner = $this->createElement('checkbox', 'tnt_is_owner', array('placeholder' => 'bool', 'label' => 'tnt_is_owner'));
+        $this->addElement($tnt_is_owner);
+        $submit = new Zend_Form_Element_Submit('submit');
+        $this->addElement($submit);
+        $back = new Zend_Form_Element_Submit('back');
+        $this->addElement($back);
+        $save = new Zend_Form_Element_Submit('save');
+        $this->addElement($save);
+        $delete = new Zend_Form_Element_Submit('delete');
+        $this->addElement($delete);
+        $tnt_is_site_vaad = $this->createElement('checkbox', 'tnt_is_site_vaad', array('placeholder' => 'bool', 'label' => 'tnt_is_site_vaad'));
+        $this->addElement($tnt_is_site_vaad);
+        $submit = new Zend_Form_Element_Submit('submit');
+        $this->addElement($submit);
+        $back = new Zend_Form_Element_Submit('back');
+        $this->addElement($back);
+        $save = new Zend_Form_Element_Submit('save');
+        $this->addElement($save);
+        $delete = new Zend_Form_Element_Submit('delete');
+        $this->addElement($delete);
+        $tnt_is_nbrhd_vaad = $this->createElement('checkbox', 'tnt_is_nbrhd_vaad', array('placeholder' => 'bool', 'label' => 'tnt_is_nbrhd_vaad'));
+        $this->addElement($tnt_is_nbrhd_vaad);
+        $submit = new Zend_Form_Element_Submit('submit');
+        $this->addElement($submit);
+        $back = new Zend_Form_Element_Submit('back');
+        $this->addElement($back);
+        $save = new Zend_Form_Element_Submit('save');
+        $this->addElement($save);
+        $delete = new Zend_Form_Element_Submit('delete');
+        $this->addElement($delete);
+        $tnt_is_city_vaad = $this->createElement('checkbox', 'tnt_is_city_vaad', array('placeholder' => 'bool', 'label' => 'tnt_is_city_vaad'));
+        $this->addElement($tnt_is_city_vaad);
+        $submit = new Zend_Form_Element_Submit('submit');
+        $this->addElement($submit);
+        $back = new Zend_Form_Element_Submit('back');
+        $this->addElement($back);
+        $save = new Zend_Form_Element_Submit('save');
+        $this->addElement($save);
+        $delete = new Zend_Form_Element_Submit('delete');
+        $this->addElement($delete);
+        $tnt_is_admin = $this->createElement('checkbox', 'tnt_is_admin', array('placeholder' => 'bool', 'label' => 'tnt_is_admin'));
+        $this->addElement($tnt_is_admin);
+        $submit = new Zend_Form_Element_Submit('submit');
+        $this->addElement($submit);
+        $back = new Zend_Form_Element_Submit('back');
+        $this->addElement($back);
+        $save = new Zend_Form_Element_Submit('save');
+        $this->addElement($save);
+        $delete = new Zend_Form_Element_Submit('delete');
+        $this->addElement($delete);
+        $id->setDecorators(array('ViewHelper'));
+        $bld_id->setDecorators(array('ViewHelper'));
+        $submit->setDecorators(array('ViewHelper'));
+        $back->setDecorators(array('ViewHelper'));
+        $save->setDecorators(array('ViewHelper'));
+        $delete->setDecorators(array('ViewHelper'));
+        $this->addDisplayGroups(array(
+            'right' => array(
+                'elements' => array('tnt_is_active', 'tnt_app_num', 'tnt_first_name', 'tnt_last_name', 'tnt_password', 'tnt_birthday', 'tnt_email', 'tnt_app_phone', 'tnt_picture', 'tnt_mobile', 'tnt_entry_date'),
+            ),
+            'left' => array(
+                'elements' => array('tnt_prev_debt', 'tnt_occupation', 'tnt_is_vaad', 'tnt_is_owner', 'tnt_is_site_vaad', 'tnt_is_nbrhd_vaad', 'tnt_is_city_vaad', 'tnt_is_admin'),
+            ),
+            'bottom' => array(
+                'elements' => array('id', 'bld_id', 'submit', 'back', 'save', 'delete'),
+            ),
+        ));
 
-        $decoratorOptions = array(
-            'ViewHelper',
-            'Errors',
-            array(array('data' => 'HtmlTag'), array('tag' => 'td', 'class' => 'element')),
-        );
-
-        $tnt_first_name = $this->createElement('text', 'tnt_first_name');
-        $tnt_first_name->setLabel('tnt_first_name');
-        
-        //$tnt_first_name->setDecorators($decoratorOptions);
-
-
-
-        $this->addElements(array($tnt_first_name,));
+        $this->setDisplayGroupDecorators(array('Description', 'FormElements', 'Fieldset'));
     }
 
 }
-?>

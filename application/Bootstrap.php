@@ -8,9 +8,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         //add the jquery view helper path into your project
         //jquery lib includes here (default loads from google CDN)
         $view->jQuery()->enable()//enable jquery ; ->setCdnSsl(true) if need to load from ssl location
-                //->setVersion('1.6.4')//jQuery version, automatically 1.5 = 1.5.latest
-                //->setUiVersion('1.8.14')//jQuery UI version, automatically 1.8 = 1.8.latest
-                //->addStylesheet('/css/custom-theme/jquery-ui-1.8.14.custom.css')//add the css
+                ->setVersion('1.6.4')//jQuery version, automatically 1.5 = 1.5.latest
+                ->setUiVersion('1.8.14')//jQuery UI version, automatically 1.8 = 1.8.latest
+                ->addStylesheet('/css/sunny/jquery-ui-1.8.16.custom.css')//add the css
                 ->uiEnable(); //enable ui
 
         return $view;
@@ -85,18 +85,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $router->addRoute('contact', $route);
 
         $route = new Zend_Controller_Router_Route(
-                        ':controller/add/',
-                        array(
-                            'controller' => ':controller',
-                            'action' => 'add'
-                        )
-        );
-
-        $route = new Zend_Controller_Router_Route(
                         ':controller/:action/:id',
                         array(
                             'controller' => ':controller',
-                            'action' => ':action'
+                            'action' => ':action',
                         ),
                         array(
                             'id' => '\d+'
@@ -114,7 +106,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
                             'mailto' => '[^\@]+\@.*'
                         )
         );
-        $router->addRoute('tenantsid', $route);
+        $router->addRoute('sendto', $route);
     }
 
     protected function _initMenu() {
