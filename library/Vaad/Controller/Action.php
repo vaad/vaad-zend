@@ -4,6 +4,8 @@ class Vaad_Controller_Action extends Zend_Controller_Action {
 
     protected $_page = 1;
     protected $_paginator = null;
+    protected $_control = '';
+    protected $_action = '';
 
     private function isVaad() {
         $auth = Zend_Auth::getInstance();
@@ -20,6 +22,9 @@ class Vaad_Controller_Action extends Zend_Controller_Action {
 
         $cnt = $this->getRequest()->getControllerName();
         $act = $this->getRequest()->getActionName();
+        
+        $this->_control = $cnt;
+        $this->_action = $act;
 
         $ucnt = str_replace(' ', '', ucwords(str_replace('_', ' ', $cnt)));
         $this->view->topPageTitle = $translator->_($ucnt);
