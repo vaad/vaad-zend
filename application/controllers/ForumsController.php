@@ -1,6 +1,6 @@
 <?php
 
-class ForumsController extends Zend_Controller_Action
+class ForumsController extends Vaad_Controller_Action
 {
 
     public function init()

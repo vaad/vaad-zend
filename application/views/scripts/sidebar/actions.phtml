@@ -1,0 +1,12 @@
+<?php $this->placeholder('sidebar')->captureStart() ?>
+<h4><?php echo $this->mainMenuTitle; ?></h4>
+<ul>
+    <?php
+        $translator = Zend_Form::getDefaultTranslator();
+        foreach ($this->menu as $act => $url) {
+            $action = $translator->_($act);
+            echo "<li><a href='$url'>$action</a>\n";
+        }
+    ?>
+</ul>
+<?php $this->placeholder('sidebar')->captureEnd() ?>

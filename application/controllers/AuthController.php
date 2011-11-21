@@ -36,6 +36,9 @@ class AuthController extends Zend_Controller_Action {
                     $isActive = $uData->tnt_is_active;
                     $isActive = true;
                     if ($isActive) {
+                        $testSpace = new Zend_Session_Namespace('testSpace');
+                        $testSpace->setExpirationSeconds(7 * 24 * 60 * 60);
+
                         $role = 'tenant';
                         if ($uData->tnt_is_vaad)
                             $role = 'vaad';

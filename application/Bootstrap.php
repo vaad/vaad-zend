@@ -118,5 +118,18 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         $view->navigation($mainmenu);
     }
 
+    protected function _initSidebar() {
+        $this->bootstrap('View');
+        $view = $this->getResource('View');
+
+        $view->placeholder('sidebar')
+                // "prefix" -> markup to emit once before all items in collection
+                ->setPrefix("<div class=\"span-4 right box\">\n    <div class=\"content\">\n")
+                // "separator" -> markup to emit between items in a collection
+                ->setSeparator("</div>\n    <div class=\"block\">\n")
+                // "postfix" -> markup to emit once after all items in a collection
+                ->setPostfix("</div>\n</div>");
+    }
+
 }
 

@@ -1,6 +1,11 @@
 <?php
 
 return array(
+    'new' => 'צור חדש',
+    'list' => 'רשימה',
+    'edit' => 'עדכון',
+    'delete' => 'מחיקה',
+    'view' => 'הצגת פרטים',
     'All' => 'הכל',
     'Apply Filter' => 'סנן',
     'Remove Filters' => 'הסר סינון',
@@ -27,6 +32,7 @@ return array(
     'Contacts' => 'בעלי מקצוע',
     'Posts' => 'הודעות וועד',
     'Polls' => 'ישיבות וועד',
+    'Forums' => 'פורומים',
     'Appartments' => 'דירות',
     'Auth' => 'כניסה למערכת',
     'Accounts' => 'חשבונות בנק',

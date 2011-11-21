@@ -2,10 +2,6 @@
 
 class TenantsController extends Vaad_Controller_Action {
 
-    public function init() {
-        $this->view->topPageTitle = 'דיירים';
-    }
-
     public function indexAction() {
         $tbl = new Vaad_DbTable_Tenants();
         $this->view->rows = $tbl->fetchAll(null, 'tnt_app_num Asc');
@@ -24,10 +20,11 @@ class TenantsController extends Vaad_Controller_Action {
     }
 
     public function listAction() {
-        // action body
+        $this->_redirect('/tenants');
     }
 
-    public function viewAction() {
+    
+    public function viewAction($save = false) {
         $id = $this->getRequest()->getParam('id');
         if ((int) $id == 0) {
             return;
@@ -36,6 +33,9 @@ class TenantsController extends Vaad_Controller_Action {
         $row = $tbl->fetchRow("id = $id");
         //$row->tnt_prev_debt = 12;
         $form = new Vaad_Form_Tenant();
+        
+        if (!$save) 
+            $form->removeElement ('submit');
         $form->populate($row->toArray());
         $this->view->form = $form;
 
@@ -50,7 +50,8 @@ class TenantsController extends Vaad_Controller_Action {
     }
 
     public function editAction() {
-        // action body
+        $this->viewAction(true);
+        $this->renderScript('tenants/view.phtml');
     }
 
 }

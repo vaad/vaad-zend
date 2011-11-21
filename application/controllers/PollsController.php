@@ -1,6 +1,6 @@
 <?php
 
-class PollsController extends Zend_Controller_Action
+class PollsController extends Vaad_Controller_Action
 {
 
     public function init()

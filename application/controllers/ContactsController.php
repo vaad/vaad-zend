@@ -1,6 +1,6 @@
 <?php
 
-class ContactsController extends Zend_Controller_Action
+class ContactsController extends Vaad_Controller_Action
 {
 
     public function init()

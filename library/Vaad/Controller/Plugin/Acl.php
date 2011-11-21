@@ -98,8 +98,8 @@ class Vaad_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract {
          */
         if (!$acl->isAllowed($role, $controller, $action)) {
             if ($role == 'guest') {
-
                 $testSpace = new Zend_Session_Namespace('testSpace');
+                $testSpace->setExpirationSeconds(7*24*60*60);
                 $testSpace->__set('controller', $controller);
                 $testSpace->__set('action', $action);
                 $request->setControllerName('auth');

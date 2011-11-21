@@ -1,6 +1,6 @@
 <?php
 
-class AdsController extends Zend_Controller_Action
+class AdsController extends Vaad_Controller_Action
 {
 
     public function init()

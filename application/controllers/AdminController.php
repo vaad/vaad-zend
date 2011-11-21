@@ -1,6 +1,6 @@
 <?php
 
-class AdminController extends Zend_Controller_Action
+class AdminController extends Vaad_Controller_Action
 {
 
     public function init()
@@ -10,7 +10,7 @@ class AdminController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        // action body
+       // $index = Zend_Search_Lucene::create(APPLICATION_PATH . '/indexes');
     }
 
     public function transactionsAction()
