@@ -51,7 +51,7 @@ class TenantsController extends Vaad_Controller_Action {
 
     public function editAction() {
         $this->viewAction(true);
-        $this->renderScript($this->_control . '/view.phtml');
+        $this->render('view');
     }
 
 }
