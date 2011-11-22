@@ -17,6 +17,12 @@ body {
 }
 
 
+.form-header {
+    height: 70px;
+    background: url(/images/menu.jpg) no-repeat;
+
+}
+
 .header {
     height: 70px;
     background: url(/images/menu.jpg) no-repeat;
@@ -186,11 +192,29 @@ fieldset {
     clear : both;
 }
 label {
-    width : 20%;
+    width : 30%;
     float: right;
     padding-top: 4px;
 }
 
+.zend_form {
+  background : url(/images/form-bg.png) repeat-y;
+  margin-left : -2px;
+  padding-top : 25px;
+}
+
+.submit {
+  background : transparent;
+  border : 0px none;
+    font-family: Dorian;
+    font-size: 12px;
+  cursor : pointer;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+}
+
+.submit:hover {
+  border : 1px solid #0076A3;;
+}
 
 @font-face{
     font-family: 'Dorian';

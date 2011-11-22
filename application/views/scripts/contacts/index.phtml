@@ -1,4 +1,15 @@
-<br /><br />
 <div id="view-content">
-	<p>View script for controller <b>Contacts</b> and script/action name <b>index</b></p>
+    <?php
+    foreach ($this->paginator as $row) {
+	echo "<span class='postit view'>\n";
+	if (!empty($email)) {
+		$email = "<a href='/send/to/$email'>$email</a>";
+	}	
+        $name = $row->cnt_first_name . ' ' . $row->cnt_last_name ;
+        echo "<a href='/contacts/view/" . $row->id . "'>$name</a><br>";
+	echo "</span>\n";
+    }
+    ?>
+    <div class='clear'></div>
+    <?php echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml') ?>
 </div>

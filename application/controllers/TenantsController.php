@@ -10,32 +10,25 @@ class TenantsController extends Vaad_Controller_Action {
         $this->setPaginator($this->view->rows);
     }
 
-    public function createAction() {
-        $this->view->topPageTitle = 'הוספת דייר';
-        $tbl = new Vaad_DbTable_Tenants();
-        $row = $tbl->createRow();
-        $form = new Vaad_Form_Tenant();
-        $form->populate($row->toArray());
-        $this->view->form = $form;
-    }
-
     public function listAction() {
-        $this->_redirect('/tenants');
+        $this->_redirect('/' . $this->_control);
     }
 
     
     public function viewAction($save = false) {
         $id = $this->getRequest()->getParam('id');
-        if ((int) $id == 0) {
-            return;
-        }
         $tbl = new Vaad_DbTable_Tenants();
-        $row = $tbl->fetchRow("id = $id");
-        //$row->tnt_prev_debt = 12;
+        if ((int) $id == 0) {
+          $row = $tbl->createRow();
+        } else {
+          $row = $tbl->fetchRow("id = $id");
+        }
         $form = new Vaad_Form_Tenant();
         
-        if (!$save) 
+        if (!$save) { 
+            $this->view->topPageTitle = 'פרטי דייר';
             $form->removeElement ('submit');
+        }
         $form->populate($row->toArray());
         $this->view->form = $form;
 
@@ -50,6 +43,13 @@ class TenantsController extends Vaad_Controller_Action {
     }
 
     public function editAction() {
+        $this->view->topPageTitle = 'עדכון דייר';
+        $this->viewAction(true);
+        $this->render('view');
+    }
+
+    public function createAction() {
+        $this->view->topPageTitle = 'הוספת דייר';
         $this->viewAction(true);
         $this->render('view');
     }

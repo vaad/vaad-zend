@@ -34,7 +34,7 @@ class Vaad_Controller_Action extends Zend_Controller_Action {
         $menu = array(
             'list' => "/$cnt/index",
         );
-        if ($this->isVaad()) {
+        if ($this->isVaad() and ($act != 'create')) {
             $menu['new'] = "/$cnt/create";
         }
 
