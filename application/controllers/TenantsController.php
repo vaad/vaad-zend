@@ -14,27 +14,28 @@ class TenantsController extends Vaad_Controller_Action {
         $this->_redirect('/' . $this->_control);
     }
 
-    
     public function viewAction($save = false) {
         $id = $this->getRequest()->getParam('id');
         $tbl = new Vaad_DbTable_Tenants();
         if ((int) $id == 0) {
-          $row = $tbl->createRow();
+            $row = $tbl->createRow();
         } else {
-          $row = $tbl->fetchRow("id = $id");
+            $row = $tbl->fetchRow("id = $id");
         }
         $form = new Vaad_Form_Tenant();
-        
-        if (!$save) { 
+
+        if (!$save) {
             $this->view->topPageTitle = 'פרטי דייר';
-            $form->removeElement ('submit');
+            $form->removeElement('submit');
         }
+
         $form->populate($row->toArray());
         $this->view->form = $form;
 
         if ($this->_request->getPost()) {
             $formData = $this->_request->getPost();
-            var_dump($formData);
+            if ($save)
+                $this->save($formData, $tbl->info());
         }
     }
 

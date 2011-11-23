@@ -22,7 +22,7 @@ class Vaad_Controller_Action extends Zend_Controller_Action {
 
         $cnt = $this->getRequest()->getControllerName();
         $act = $this->getRequest()->getActionName();
-        
+
         $this->_control = $cnt;
         $this->_action = $act;
 
@@ -49,6 +49,28 @@ class Vaad_Controller_Action extends Zend_Controller_Action {
 
         $this->view->menu = $menu;
         $this->view->render('sidebar/actions.phtml');
+    }
+
+    protected function save($data, $tblinfo) {
+        $cols = array();
+        foreach ($tblinfo['cols'] as $k => $v) {
+            if (($v != 'id') and ($v != 'bld_id')) {
+                if (isset($data[$v])) {
+                    $cols[$v] = $data[$v];
+                }
+            }
+        }
+        //exit;
+        $tbl = new Zend_Db_Table($tblinfo['name']);
+        if ($tbl) {
+            if ((int) $data['id'] > 0) {
+                $where = " id = " . $data['id'];
+                return $tbl->update($cols, $where);
+            } else {
+                return $tbl->insert($cols);
+            }
+        }
+        //exit;
     }
 
     protected function getPage() {
