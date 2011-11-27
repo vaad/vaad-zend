@@ -2,8 +2,7 @@
     <br /><br />
     <?php echo $this->form; ?>
     <div class="messages">
-        <?php
-        foreach (Zend_Controller_Action_HelperBroker::getStaticHelper("flashMessenger")
+        <?php foreach (Zend_Controller_Action_HelperBroker::getStaticHelper("flashMessenger")
                 ->getMessages() as $message) :
             ?>
             <p><?php echo $this->escape($message); ?></p>

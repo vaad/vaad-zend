@@ -103,6 +103,24 @@ body {
     padding-top: 0;
 }
 
+.button {
+    /* Disables default styling */
+    border: none;
+    background: #78593D; /* #00B6FF;*/
+    color: #fff;
+
+    /* You need to set font, font size and cursor for buttons */
+    font-size: 15px;
+    font-family: Dorian, "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+    cursor: pointer;
+
+    /*  padding: 8px 13px; 
+    font-weight: bold; */
+}
+
+.confdel {
+    font-family: Dorian, "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+}
 #logo {
     font-family: Dorian;
     padding-right: 10px;
@@ -198,22 +216,23 @@ label {
 }
 
 .zend_form {
-  background : url(/images/form-bg.png) repeat-y;
-  margin-left : -2px;
-  padding-top : 25px;
+    background : url(/images/form-bg.png) repeat-y;
+    margin-left : -2px;
+    padding-top : 25px;
+    padding-bottom: 10px;
 }
 
 .submit {
-  background : transparent;
-  border : 0px none;
+    background : transparent;
+    border : 0px none;
     font-family: Dorian;
     font-size: 12px;
-  cursor : pointer;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+    cursor : pointer;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
 }
 
 .submit:hover {
-  border : 1px solid #0076A3;;
+    border : 1px solid #0076A3;;
 }
 
 @font-face{

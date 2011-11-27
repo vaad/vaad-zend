@@ -1,39 +1,36 @@
 <?php
 
-class AdminController extends Vaad_Controller_Action
-{
+class AdminController extends Vaad_Controller_Action {
 
-    public function init()
-    {
+    public function preDispatch() {
+        parent::preDispatch(false);
+        $menu = array(
+            'transactions' => "/transactions",
+        );
+
+        $this->view->menu = $menu;
+        $this->view->render('sidebar/actions.phtml');
+    }
+
+    public function init() {
         /* Initialize action controller here */
     }
 
-    public function indexAction()
-    {
-       // $index = Zend_Search_Lucene::create(APPLICATION_PATH . '/indexes');
+    public function indexAction() {
+        // $index = Zend_Search_Lucene::create(APPLICATION_PATH . '/indexes');
     }
 
-    public function transactionsAction()
-    {
+    public function transactionsAction() {
         // action body
     }
 
-    public function incomesAction()
-    {
+    public function incomesAction() {
         // action body
     }
 
-    public function depositsAction()
-    {
+    public function depositsAction() {
         // action body
     }
-
 
 }
-
-
-
-
-
-
 

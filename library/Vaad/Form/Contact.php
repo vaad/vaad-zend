@@ -1,78 +1,56 @@
 <?php
-
-class Vaad_Form_Contact extends ZendX_JQuery_Form {
-
-  public function __construct($options = null) {
-    parent::__construct($options);
-    $this->setAction($options['action'])->setMethod('post');
-    $id = new Zend_Form_Element_Hidden('id');
-
-    $bld_id = new Zend_Form_Element_Hidden('bld_id');
-
-    $cnt_first_name = new Zend_Form_Element_Text('cnt_first_name');
-    $cnt_first_name->setLabel('cnt_first_name')
-      ->setOptions(array('size' => '12' ));
-
-    $cnt_last_name = new Zend_Form_Element_Text('cnt_last_name');
-    $cnt_last_name->setLabel('cnt_last_name')
-      ->setOptions(array('size' => '12' ));
-
-    $cnt_phone1 = new Zend_Form_Element_Text('cnt_phone1');
-    $cnt_phone1->setLabel('cnt_phone1')
-      ->setOptions(array('size' => '12' ));
-
-    $cnt_phone2 = new Zend_Form_Element_Text('cnt_phone2');
-    $cnt_phone2->setLabel('cnt_phone2')
-      ->setOptions(array('size' => '12' ));
-
-    $cnt_address = new Zend_Form_Element_Text('cnt_address');
-    $cnt_address->setLabel('cnt_address')
-      ->setOptions(array('size' => '12' ));
-
-    $cnt_remarks = new Zend_Form_Element_Textarea('cnt_remarks');
-    $cnt_remarks->setLabel('cnt_remarks')
-      ->setOptions(array('size' => '10'  ,'rows' => '5', 'cols' => '20'));
-
-    $cnt_type = new Zend_Form_Element_Text('cnt_type');
-    $cnt_type->setLabel('cnt_type')
-      ->setOptions(array('size' => '5' ));
-
-    $cnt_email = new Zend_Form_Element_Text('cnt_email');
-    $cnt_email->setLabel('cnt_email')
-      ->setOptions(array('size' => '12' ));
-
-    $submit = $this->createElement('submit', 'submit', array(
-          'label' => 'save', 'class' => 'submit'));
-    $back = $this->createElement('submit', 'back', array(
-          'label' => 'back', 'class' => 'submit'));
-
-    $this->addElement($id)
-      ->addElement($bld_id)
-      ->addElement($cnt_first_name)
-      ->addElement($cnt_last_name)
-      ->addElement($cnt_phone1)
-      ->addElement($cnt_phone2)
-      ->addElement($cnt_address)
-      ->addElement($cnt_remarks)
-      ->addElement($cnt_type)
-      ->addElement($cnt_email)->addElement($back)
-      ->addElement($submit);
-
-    $this->addDisplayGroups(array(
-          'left' => array(
-            'options'  => array('description' => 'שמאל'),
-            'elements' => array('cnt_address','cnt_remarks','cnt_type','cnt_email'),
-            ),
-          'right' => array(
-            'options'  => array('description' => 'ימין'),
-            'elements' => array('cnt_first_name','cnt_last_name','cnt_phone1','cnt_phone2'),
-            ),
-          'bottom' => array(
-            'elements' => array('submit','back', 'id','bld_id'),
-            )
-          ));
-
-    $this->setDisplayGroupDecorators(array('Description', 'FormElements', 'Fieldset'));
-  }
-
+ 
+ class Vaad_Form_Contact extends ZendX_JQuery_Form {
+ 
+ public function __construct($options = null) {
+ parent::__construct($options);
+ $this->setAction($options['action'])->setMethod('post');
+ 	$id = $this->createElement('hidden', 'id');
+	$this->addElement($id);
+	$bld_id = $this->createElement('hidden', 'bld_id');
+	$this->addElement($bld_id);
+	$cnt_first_name = $this->createElement('text', 'cnt_first_name', array('size' => 17, 'label' => 'cnt_first_name'));
+	$this->addElement($cnt_first_name);
+	$cnt_last_name = $this->createElement('text', 'cnt_last_name', array('size' => 17, 'label' => 'cnt_last_name'));
+	$this->addElement($cnt_last_name);
+	$cnt_phone1 = $this->createElement('text', 'cnt_phone1', array('size' => 17, 'label' => 'cnt_phone1'));
+	$this->addElement($cnt_phone1);
+	$cnt_phone2 = $this->createElement('text', 'cnt_phone2', array('size' => 17, 'label' => 'cnt_phone2'));
+	$this->addElement($cnt_phone2);
+	$cnt_address = $this->createElement('text', 'cnt_address', array('size' => 17, 'label' => 'cnt_address'));
+	$this->addElement($cnt_address);
+	$cnt_remarks = $this->createElement('text', 'cnt_remarks', array('size' => 17, 'label' => 'cnt_remarks'));
+	$this->addElement($cnt_remarks);
+	$cnt_type = $this->createElement('text', 'cnt_type', array('size' => 17, 'label' => 'cnt_type'));
+	$this->addElement($cnt_type);
+	$cnt_email = $this->createElement('text', 'cnt_email', array('size' => 17, 'label' => 'cnt_email'));
+	$this->addElement($cnt_email);
+$save = new Zend_Form_Element_Submit('save');
+$this->addElement($save);
+$back = new Zend_Form_Element_Submit('back');
+$this->addElement($back);
+$repeat = new Zend_Form_Element_Submit('repeat');
+$this->addElement($repeat);
+$delete = new Zend_Form_Element_Submit('delete');
+$this->addElement($delete);
+$id->setDecorators(array('ViewHelper'));
+$bld_id->setDecorators(array('ViewHelper'));
+$save->setDecorators(array('ViewHelper'));
+$back->setDecorators(array('ViewHelper'));
+$repeat->setDecorators(array('ViewHelper'));
+$delete->setDecorators(array('ViewHelper'));
+$this->addDisplayGroups(array(
+ 'right' => array(
+ 'elements' => array('cnt_first_name','cnt_last_name','cnt_phone1','cnt_phone2','cnt_address'),
+),
+ 'left' => array(
+ 'elements' => array('cnt_remarks','cnt_type','cnt_email'),
+),
+ 'bottom' => array(
+ 'elements' => array('id','bld_id','save','back','repeat','delete'),
+),
+));
+ 
+$this->setDisplayGroupDecorators(array('Description', 'FormElements', 'Fieldset'));	
+}
 }

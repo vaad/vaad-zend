@@ -1,134 +1,94 @@
 <?php
+ 
+ class Vaad_Form_Tenant extends ZendX_JQuery_Form {
+ 
+ public function __construct($options = null) {
+ parent::__construct($options);
+ $this->setAction($options['action'])->setMethod('post');
+ 	$id = $this->createElement('hidden', 'id');
+	$this->addElement($id);
+	$bld_id = $this->createElement('hidden', 'bld_id');
+	$this->addElement($bld_id);
+	$tnt_is_active = $this->createElement('checkbox', 'tnt_is_active', array('size' => 17, 'label' => 'tnt_is_active'));
+	$this->addElement($tnt_is_active);
+	$tnt_app_num = $this->createElement('text', 'tnt_app_num', array('size' => 17, 'label' => 'tnt_app_num'));
+	$tnt_app_num->setRequired(true);
+	$this->addElement($tnt_app_num);
+	$tnt_first_name = $this->createElement('text', 'tnt_first_name', array('size' => 17, 'label' => 'tnt_first_name'));
+	$tnt_first_name->setRequired(true);
+	$this->addElement($tnt_first_name);
+	$tnt_last_name = $this->createElement('text', 'tnt_last_name', array('size' => 17, 'label' => 'tnt_last_name'));
+	$tnt_last_name->setRequired(true);
+	$this->addElement($tnt_last_name);
+	$tnt_password = $this->createElement('text', 'tnt_password', array('size' => 17, 'label' => 'tnt_password'));
+	$this->addElement($tnt_password);
+$tnt_birthday = new ZendX_JQuery_Form_Element_DatePicker('tnt_birthday');
+$tnt_birthday->setJQueryParams(array( 'dateFormat' => 'dd/mm/yy', 'timeFormat' => 'hh:mm:ss'));
+$tnt_birthday->setAttrib('size', '10') ->setLabel('tnt_birthday') ->setValue(date('d/m/Y H:i:s'));
+	$this->addElement($tnt_birthday);
+	$tnt_email = $this->createElement('text', 'tnt_email', array('size' => 17, 'label' => 'tnt_email'));
+	$this->addElement($tnt_email);
+	$tnt_app_phone = $this->createElement('text', 'tnt_app_phone', array('size' => 17, 'label' => 'tnt_app_phone'));
+	$this->addElement($tnt_app_phone);
+	$tnt_picture = $this->createElement('text', 'tnt_picture', array('size' => 17, 'label' => 'tnt_picture'));
+	$this->addElement($tnt_picture);
+	$tnt_mobile = $this->createElement('text', 'tnt_mobile', array('size' => 17, 'label' => 'tnt_mobile'));
+	$this->addElement($tnt_mobile);
+$tnt_entry_date = new ZendX_JQuery_Form_Element_DatePicker('tnt_entry_date');
+$tnt_entry_date->setJQueryParams(array( 'dateFormat' => 'dd/mm/yy', 'timeFormat' => 'hh:mm:ss'));
+$tnt_entry_date->setAttrib('size', '10') ->setLabel('tnt_entry_date') ->setValue(date('d/m/Y H:i:s'));
+	$this->addElement($tnt_entry_date);
+$tnt_prev_debt = new Vaad_Form_Element_Currency('tnt_prev_debt', array('size' => 17, 'label' => 'tnt_prev_debt'));
+	$this->addElement($tnt_prev_debt);
+	$tnt_occupation = $this->createElement('text', 'tnt_occupation', array('size' => 17, 'label' => 'tnt_occupation'));
+	$this->addElement($tnt_occupation);
+	$tnt_is_vaad = $this->createElement('checkbox', 'tnt_is_vaad', array('size' => 17, 'label' => 'tnt_is_vaad'));
+	$this->addElement($tnt_is_vaad);
+	$tnt_is_owner = $this->createElement('checkbox', 'tnt_is_owner', array('size' => 17, 'label' => 'tnt_is_owner'));
+	$this->addElement($tnt_is_owner);
+	$tnt_is_site_vaad = $this->createElement('checkbox', 'tnt_is_site_vaad', array('size' => 17, 'label' => 'tnt_is_site_vaad'));
+	$this->addElement($tnt_is_site_vaad);
+	$tnt_is_nbrhd_vaad = $this->createElement('checkbox', 'tnt_is_nbrhd_vaad', array('size' => 17, 'label' => 'tnt_is_nbrhd_vaad'));
+	$this->addElement($tnt_is_nbrhd_vaad);
+	$tnt_is_city_vaad = $this->createElement('checkbox', 'tnt_is_city_vaad', array('size' => 17, 'label' => 'tnt_is_city_vaad'));
+	$this->addElement($tnt_is_city_vaad);
+	$tnt_is_admin = $this->createElement('checkbox', 'tnt_is_admin', array('size' => 17, 'label' => 'tnt_is_admin'));
+	$this->addElement($tnt_is_admin);
+$confdel = new Zend_Form_Element_Checkbox('confdel');
+$confdel->setDescription('<span class="confdel">אישור מחיקה</span>')
+->setDecorators(array(
+'ViewHelper',
+array('Description', array('escape' => false, 'tag' => false)),
+'Errors',
+));
+$this->addElement($confdel);
 
-class Vaad_Form_Tenant extends ZendX_JQuery_Form {
-
-    public function __construct($options = null) {
-        parent::__construct($options);
-        $this->setAction($options['action'])->setMethod('post');
-        $id = new Zend_Form_Element_Hidden('id');
-
-        $bld_id = new Zend_Form_Element_Hidden('bld_id');
-
-        $tnt_is_active = new Zend_Form_Element_Checkbox('tnt_is_active');
-        $tnt_is_active->setLabel('tnt_is_active')
-                ->setOptions(array('size' => '1'));
-
-        $tnt_app_num = new Zend_Form_Element_Text('tnt_app_num');
-        $tnt_app_num->setLabel('tnt_app_num')
-                ->setOptions(array('size' => '5'))
-                ->setRequired(true);
-
-        $tnt_first_name = new Zend_Form_Element_Text('tnt_first_name');
-        $tnt_first_name->setLabel('tnt_first_name')
-                ->setOptions(array('size' => '12'))
-                ->setRequired(true);
-
-        $tnt_last_name = new Zend_Form_Element_Text('tnt_last_name');
-        $tnt_last_name->setLabel('tnt_last_name')
-                ->setOptions(array('size' => '12'))
-                ->setRequired(true);
-
-        $tnt_password = new Zend_Form_Element_Text('tnt_password');
-        $tnt_password->setLabel('tnt_password')
-                ->setOptions(array('size' => '12'));
-
-        $tnt_birthday = new ZendX_JQuery_Form_Element_DatePicker('tnt_birthday');
-        $tnt_birthday->setJQueryParam('dateFormat', 'dd.mm.yy');
-
-        $tnt_birthday->setLabel('tnt_birthday')
-                ->setOptions(array('size' => '10'));
-
-        $tnt_email = new Zend_Form_Element_Text('tnt_email');
-        $tnt_email->setLabel('tnt_email')
-                ->setOptions(array('size' => '12'));
-
-        $tnt_app_phone = new Zend_Form_Element_Text('tnt_app_phone');
-        $tnt_app_phone->setLabel('tnt_app_phone')
-                ->setOptions(array('size' => '12'));
-
-        $tnt_picture = new Zend_Form_Element_Text('tnt_picture');
-        $tnt_picture->setLabel('tnt_picture')
-                ->setOptions(array('size' => '12'));
-
-        $tnt_mobile = new Zend_Form_Element_Text('tnt_mobile');
-        $tnt_mobile->setLabel('tnt_mobile')
-                ->setOptions(array('size' => '12'));
-
-        $tnt_entry_date = new ZendX_JQuery_Form_Element_DatePicker('tnt_entry_date');
-        $tnt_entry_date->setJQueryParam('dateFormat', 'dd.mm.yy');
-        ;
-        $tnt_entry_date->setLabel('tnt_entry_date')
-                ->setOptions(array('size' => '10'));
-
-        $tnt_prev_debt = new Zend_Form_Element_Text('tnt_prev_debt');
-        $tnt_prev_debt->setLabel('tnt_prev_debt')
-                ->setOptions(array('size' => '10'));
-
-        $tnt_occupation = new Zend_Form_Element_Text('tnt_occupation');
-        $tnt_occupation->setLabel('tnt_occupation')
-                ->setOptions(array('size' => '12'));
-
-        $tnt_is_vaad = new Zend_Form_Element_Checkbox('tnt_is_vaad');
-        $tnt_is_vaad->setLabel('tnt_is_vaad')
-                ->setOptions(array('size' => '1'));
-
-        $tnt_is_owner = new Zend_Form_Element_Checkbox('tnt_is_owner');
-        $tnt_is_owner->setLabel('tnt_is_owner')
-                ->setOptions(array('size' => '1'));
-
-        $tnt_is_site_vaad = new Zend_Form_Element_Checkbox('tnt_is_site_vaad');
-        $tnt_is_site_vaad->setLabel('tnt_is_site_vaad')
-                ->setOptions(array('size' => '1'));
-
-        $tnt_is_nbrhd_vaad = new Zend_Form_Element_Checkbox('tnt_is_nbrhd_vaad');
-        $tnt_is_nbrhd_vaad->setLabel('tnt_is_nbrhd_vaad')
-                ->setOptions(array('size' => '1'));
-
-        $tnt_is_city_vaad = new Zend_Form_Element_Checkbox('tnt_is_city_vaad');
-        $tnt_is_city_vaad->setLabel('tnt_is_city_vaad')
-                ->setOptions(array('size' => '1'));
-
-        $tnt_is_admin = new Zend_Form_Element_Checkbox('tnt_is_admin');
-        $tnt_is_admin->setLabel('tnt_is_admin')
-                ->setOptions(array('size' => '1'));
-
-        $submit = $this->createElement('submit', 'submit', array(
-            'label' => 'save', 'class' => 'submit'));
-        $back = $this->createElement('submit', 'back', array(
-            'label' => 'back', 'class' => 'submit'));
-        $this->addElement($id)
-                ->addElement($bld_id)
-                ->addElement($tnt_is_active)
-                ->addElement($tnt_app_num)
-                ->addElement($tnt_first_name)
-                ->addElement($tnt_last_name)
-                ->addElement($tnt_password)
-                ->addElement($tnt_birthday)
-                ->addElement($tnt_email)
-                ->addElement($tnt_app_phone)
-                ->addElement($tnt_picture)
-                ->addElement($tnt_mobile)
-                ->addElement($tnt_entry_date)
-                ->addElement($tnt_prev_debt)
-                ->addElement($tnt_occupation)
-                ->addElement($tnt_is_vaad)
-                ->addElement($tnt_is_owner)
-                ->addElement($back)
-                ->addElement($submit);
-
-        $this->addDisplayGroups(array(
-            'right' => array(
-                'elements' => array('tnt_is_active', 'tnt_app_num', 'tnt_first_name', 'tnt_last_name', 'tnt_password', 'tnt_birthday', 'tnt_email', 'tnt_app_phone', 'tnt_picture'),
-            ),
-            'left' => array(
-                'elements' => array('tnt_mobile', 'tnt_entry_date', 'tnt_prev_debt', 'tnt_occupation', 'tnt_is_vaad', 'tnt_is_owner','tnt_is_city_vaad'),
-            ),
-            'bottom' => array(
-                'elements' => array('submit', 'back', 'id', 'bld_id'),
-            )
-        ));
-
-        $this->setDisplayGroupDecorators(array('Description', 'FormElements', 'Fieldset'));
-    }
-
+$save = new Zend_Form_Element_Submit('save', array('class' => 'button'));
+$this->addElement($save);
+$back = new Zend_Form_Element_Submit('back', array('class' => 'button'));
+$this->addElement($back);
+$repeat = new Zend_Form_Element_Submit('repeat', array('class' => 'button'));
+$this->addElement($repeat);
+$delete = new Zend_Form_Element_Submit('delete', array('class' => 'button'));
+$this->addElement($delete);
+$id->setDecorators(array('ViewHelper'));
+$bld_id->setDecorators(array('ViewHelper'));
+$save->setDecorators(array('ViewHelper'));
+$back->setDecorators(array('ViewHelper'));
+$repeat->setDecorators(array('ViewHelper'));
+$delete->setDecorators(array('ViewHelper'));
+$this->addDisplayGroups(array(
+ 'right' => array(
+ 'elements' => array('tnt_is_active','tnt_app_num','tnt_first_name','tnt_last_name','tnt_password','tnt_birthday','tnt_email','tnt_app_phone','tnt_picture','tnt_mobile','tnt_entry_date'),
+),
+ 'left' => array(
+ 'elements' => array('tnt_prev_debt','tnt_occupation','tnt_is_vaad','tnt_is_owner','tnt_is_site_vaad','tnt_is_nbrhd_vaad','tnt_is_city_vaad','tnt_is_admin'),
+),
+ 'bottom' => array(
+ 'elements' => array('id','bld_id','save','back','repeat','delete','confdel'),
+),
+));
+ 
+$this->setDisplayGroupDecorators(array('Description', 'FormElements', 'Fieldset'));	
+}
 }

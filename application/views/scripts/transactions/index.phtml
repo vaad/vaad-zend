@@ -1,0 +1,37 @@
+<div id="view-content">
+    <table>
+        <th>תאריך</th>
+        <th>תיאור</th>
+        <th>קטגוריה</th>
+        <th>פרוייקט</th>
+        <th>סכום</th>
+        <?php
+        foreach ($this->paginator as $row) {
+            $name = $row->trn_desc;
+            $date = $row->trn_date;
+            $amt = $row->trn_amount;
+            ?>
+
+            <tr>
+                <td><?php echo "<a href='/" .$this->cntName. "/view/" . $row->id . "'>$date</a>"; ?></td>
+                <td><?php echo $name; ?></td>
+                <td><?php echo $date; ?></td>
+                <td><?php echo $date; ?></td>
+                <td><?php echo $amt; ?></td>
+
+            </tr>
+            <?php
+        }
+        ?>
+    </table>
+    <div class='clear'></div>
+    <?php echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml') ?>
+    <div class="messages">
+        <?php
+        foreach (Zend_Controller_Action_HelperBroker::getStaticHelper("flashMessenger")
+                ->getMessages() as $message) :
+            ?>
+            <p><?php echo $this->escape($message); ?></p>
+<?php endforeach; ?>
+    </div>
+</div>

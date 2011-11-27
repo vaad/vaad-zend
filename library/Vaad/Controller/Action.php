@@ -6,6 +6,14 @@ class Vaad_Controller_Action extends Zend_Controller_Action {
     protected $_paginator = null;
     protected $_control = '';
     protected $_action = '';
+    protected $_msg;
+    protected $_delete = 'מחיקת';
+    protected $_edit = 'עדכון';
+    protected $_update = 'עדכון';
+    protected $_new = 'הוספת';
+    protected $_detail = 'פרטי';
+    protected $tbl;
+    protected $form;
 
     private function isVaad() {
         $auth = Zend_Auth::getInstance();
@@ -17,7 +25,8 @@ class Vaad_Controller_Action extends Zend_Controller_Action {
         return false;
     }
 
-    public function preDispatch() {
+    public function preDispatch($withmenu = true) {
+        $this->_msg = Zend_Controller_Action_HelperBroker::getStaticHelper("flashMessenger");
         $translator = Zend_Form::getDefaultTranslator();
 
         $cnt = $this->getRequest()->getControllerName();
@@ -31,46 +40,26 @@ class Vaad_Controller_Action extends Zend_Controller_Action {
         $this->view->mainMenuTitle = $translator->_($ucnt);
 
         $this->view->cntName = $cnt;
-        $menu = array(
-            'list' => "/$cnt/index",
-        );
-        if ($this->isVaad() and ($act != 'create')) {
-            $menu['new'] = "/$cnt/create";
-        }
-
-        $id = $this->getRequest()->getParam('id');
-        if ((int) $id > 0) {
-            if ($this->isVaad() && ($act != 'edit')) {
-                $menu['edit'] = "/$cnt/edit/$id";
+        if ($withmenu) {
+            $menu = array(
+                'list' => "/$cnt/index",
+            );
+            if ($this->isVaad() and ($act != 'create')) {
+                $menu['new'] = "/$cnt/create";
             }
-            if ($act != 'view')
-                $menu['view'] = "/$cnt/view/$id";
-        }
 
-        $this->view->menu = $menu;
-        $this->view->render('sidebar/actions.phtml');
-    }
-
-    protected function save($data, $tblinfo) {
-        $cols = array();
-        foreach ($tblinfo['cols'] as $k => $v) {
-            if (($v != 'id') and ($v != 'bld_id')) {
-                if (isset($data[$v])) {
-                    $cols[$v] = $data[$v];
+            $id = $this->getRequest()->getParam('id');
+            if ((int) $id > 0) {
+                if ($this->isVaad() && ($act != 'edit')) {
+                    $menu['edit'] = "/$cnt/edit/$id";
                 }
+                if ($act != 'view')
+                    $menu['view'] = "/$cnt/view/$id";
             }
+
+            $this->view->menu = $menu;
+            $this->view->render('sidebar/actions.phtml');
         }
-        //exit;
-        $tbl = new Zend_Db_Table($tblinfo['name']);
-        if ($tbl) {
-            if ((int) $data['id'] > 0) {
-                $where = " id = " . $data['id'];
-                return $tbl->update($cols, $where);
-            } else {
-                return $tbl->insert($cols);
-            }
-        }
-        //exit;
     }
 
     protected function getPage() {
@@ -87,6 +76,97 @@ class Vaad_Controller_Action extends Zend_Controller_Action {
         $this->_paginator->setCurrentPageNumber($this->getPage());
 
         $this->view->paginator = $this->_paginator;
+    }
+
+    public function indexAction() {
+
+        $this->view->rows = $this->tbl->fetchAll(null);
+
+        $page = $this->getPage();
+        $this->setPaginator($this->view->rows);
+    }
+
+    public function listAction() {
+        $this->_redirect('/' . $this->_control);
+    }
+
+    public function viewAction($save = false) {
+        $id = $this->getRequest()->getParam('id');
+
+        if ($this->_request->getPost()) {
+            $formData = $this->_request->getPost();
+            $isSave = isset($formData['save']);
+            $isBack = isset($formData['back']);
+            $isRepeat = isset($formData['repeat']);
+            $isDelete = isset($formData['delete']);
+            if ($save) {
+                $id = $formData['id'];
+                if ($save) {
+                    if ($this->form->isValid($formData)) {
+                        if ($isSave or $isRepeat) {
+                            if ($this->tbl->Save($id, $formData)) {
+                                $this->_msg->addMessage('נשמר בהצלחה');
+                                $this->_redirect('/' . $this->_control);
+                            } else {
+                                $this->_msg->addMessage(' לא נשמר בהצלחה');
+                            }
+                        }
+                    }
+                }
+            }
+            if ($isDelete) {
+                $conf = $formData['confdel'];
+                $id = $formData['id'];
+                if ((int) $conf === 1) {
+                    if ($this->tbl->delete("id = $id")) {
+                        $this->_msg->addMessage(' נמחק בהצלחה');
+                        $this->_redirect('/' . $this->_control);
+                    }
+                } else {
+                    $this->_msg->addMessage('אנא, אשר את המחיקה תחילה  ');
+                    $this->_redirect('/' . $this->_control . '/edit/' . $id);
+                }
+            }
+            if ($isBack) {
+                $this->_redirect('/' . $this->_control);
+            }
+        }
+        if ((int) $id == 0) {
+            $row = $this->tbl->createRow();
+        } else {
+            $row = $this->tbl->fetchRow("id = $id");
+        }
+
+        if (!$save) {
+            $this->view->topPageTitle = $this->_detail . ' ' . $this->_name;
+            $this->form->removeElement('repeat');
+            $this->form->removeElement('delete');
+            $this->form->removeElement('confdel');
+            $this->form->removeElement('save');
+        } else {
+            if ($id == 0) {
+                $this->form->removeElement('delete');
+                $this->form->removeElement('confdel');
+            }
+            else
+                $this->form->removeElement('repeat');
+        }
+
+
+        $this->form->populate($row->toArray());
+        $this->view->form = $this->form;
+    }
+
+    public function editAction() {
+        $this->view->topPageTitle = $this->_update . ' ' . $this->_name;
+        $this->viewAction(true);
+        $this->render('view');
+    }
+
+    public function createAction() {
+        $this->view->topPageTitle = $this->_new . ' ' . $this->_name;
+        $this->viewAction(true);
+        $this->render('view');
     }
 
 }

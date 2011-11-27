@@ -45,6 +45,8 @@ class AuthController extends Zend_Controller_Action {
                         if ($uData->tnt_is_admin)
                             $role = 'admin';
                         $uData->role = $role;
+                        $seconds = 60 * 60 * 24 * 7; // 7 days
+                        Zend_Session::rememberMe($seconds);
                         $auth = Zend_Auth::getInstance();
                         $storage = $auth->getStorage();
                         $storage->write($uData);
