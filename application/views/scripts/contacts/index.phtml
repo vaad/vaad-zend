@@ -1,15 +1,17 @@
 <div id="view-content">
-    <?php
-    foreach ($this->paginator as $row) {
-	echo "<span class='postit view'>\n";
-	if (!empty($email)) {
-		$email = "<a href='/send/to/$email'>$email</a>";
-	}	
-        $name = $row->cnt_first_name . ' ' . $row->cnt_last_name ;
-        echo "<a href='/contacts/view/" . $row->id . "'>$name</a><br>";
-	echo "</span>\n";
-    }
-    ?>
-    <div class='clear'></div>
-    <?php echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml') ?>
+<?php
+foreach ($this->paginator as $row) {
+  echo "<span class='postit view'>\n";
+  $name = $row->cnt_first_name . ' ' . $row->cnt_last_name ;
+  echo "<a href='/contacts/view/" . $row->id . "'>$name</a><br>";
+  if (!empty($email)) {
+    $email = "<a href='/send/to/$email'>$email</a>";
+  }	
+  echo $row->cnt_phone1 . "<br />";
+  echo $row->cnt_phone2 . "<br />";
+  echo "</span>\n";
+}
+?>
+<div class='clear'></div>
+<?php echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml') ?>
 </div>
