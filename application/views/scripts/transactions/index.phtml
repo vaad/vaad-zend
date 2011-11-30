@@ -1,22 +1,31 @@
 <div id="view-content">
     <table>
         <th>תאריך</th>
-        <th>תיאור</th>
-        <th>קטגוריה</th>
         <th>פרוייקט</th>
+        <th>קטגוריה</th>
+        <th>תיאור</th>
         <th>סכום</th>
         <?php
         foreach ($this->paginator as $row) {
             $name = $row->trn_desc;
             $date = $row->trn_date;
             $amt = $row->trn_amount;
+            $prj_tbl = new Vaad_DbTable_Projects();
+            $prj = $prj_tbl->find($row->prj_id,  Zend_Registry::get('bld_id'))->current();
+            $prj_title = '';
+            if ($prj) $prj_title = $prj->prj_title;
+            
+            $cat_tbl = new Vaad_DbTable_TrnCatCodes();           
+            $cat_desc = '';
+            $cat = $cat_tbl->find($row->trn_cat)->current();
+            if ($cat) $cat_desc = $cat->code_desc;
             ?>
 
             <tr>
                 <td><?php echo "<a href='/" .$this->cntName. "/view/" . $row->id . "'>$date</a>"; ?></td>
+                <td><?php echo $prj_title; ?></td>
+                <td><?php echo $cat_desc; ?></td>
                 <td><?php echo $name; ?></td>
-                <td><?php echo $date; ?></td>
-                <td><?php echo $date; ?></td>
                 <td><?php echo $amt; ?></td>
 
             </tr>
