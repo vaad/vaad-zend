@@ -33,6 +33,8 @@ return array(
     'Contacts' => 'בעלי מקצוע',
     'Transactions' => 'תנועות כספיות',
     'transactions' => 'תנועות כספיות',
+    'incomes' => 'הכנסות',
+    'deposit' => 'הפקדות',
     'Posts' => 'הודעות וועד',
     'Polls' => 'ישיבות וועד',
     'Forums' => 'פורומים',

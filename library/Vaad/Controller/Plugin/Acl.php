@@ -31,6 +31,7 @@ class Vaad_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract {
         $acl->add(new Zend_Acl_Resource('incomes'));      
         $acl->add(new Zend_Acl_Resource('send'));
         $acl->add(new Zend_Acl_Resource('accounts'));
+        $acl->add(new Zend_Acl_Resource('deposit'));
 
         $acl->allow('guest', 'auth', array('login', 'thankyou'));
         $acl->allow('guest', 'auth', array('register'));
@@ -64,6 +65,7 @@ class Vaad_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract {
         $acl->allow('vaad', 'transactions', null);
         $acl->allow('vaad', 'incomes', null);
         $acl->allow('vaad', 'accounts', null);
+        $acl->allow('vaad', 'deposit', null);
 
         $acl->allow('vaad', 'admin', null); // Vaad can do admin process
 

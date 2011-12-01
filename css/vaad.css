@@ -29,6 +29,10 @@ body {
 
 }
 
+.view {
+    font-family: Dorian;
+    line-height: 25px;
+}
 .footer {
     height: 43px;
     background: url(/images/footer.png) no-repeat;

@@ -1,0 +1,49 @@
+<div id="view-content">
+    <table>
+        <th>תאריך</th>
+        <th>עד תאריך</th>
+        <th>דירה</th>
+        <th>בנק</th>
+        <th>סניף</th>
+        <th>שיק</th>
+        <th>סכום</th>
+        <?php
+        $bnk = new Vaad_DbTable_BankCodes();
+        $apt = new Vaad_DbTable_Appartments();
+        foreach ($this->paginator as $row) {
+            $amt = $row->inc_amount;
+            $name = '';
+            $cat_desc = '';
+            $prj_title = '';
+            $date = $row->inc_date;
+            $app = $apt->getAptNum($row->inc_apt_num);
+            $bnk_row = $bnk->fetchRow("id = " . $row->inc_bank);
+            $bank = '';
+            if ($bnk_row) $bank  = $bnk_row['code_desc'];
+            ?>
+
+            <tr>
+                <td><?php echo "<a href='/" .$this->cntName. "/view/" . $row->id . "'>$date</a>"; ?></td>
+                <td><?php echo $row->inc_until_date; ?></td>
+                <td><?php echo $app; ?></td>
+                <td><?php echo $bank; ?></td>
+                <td><?php echo $row->inc_branch; ?></td>
+                <td><?php echo $row->inc_chk_no; ?></td>
+                <td><?php echo $this->asCurrency($amt); ?></td>
+
+            </tr>
+            <?php
+        }
+        ?>
+    </table>
+    <div class='clear'></div>
+    <?php echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml') ?>
+    <div class="messages">
+        <?php
+        foreach (Zend_Controller_Action_HelperBroker::getStaticHelper("flashMessenger")
+                ->getMessages() as $message) :
+            ?>
+            <p><?php echo $this->escape($message); ?></p>
+<?php endforeach; ?>
+    </div>
+</div>

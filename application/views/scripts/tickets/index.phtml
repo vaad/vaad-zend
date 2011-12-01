@@ -1,4 +1,12 @@
-<br /><br />
 <div id="view-content">
-	<p>View script for controller <b>Tickets</b> and script/action name <b>index</b></p>
+    <?php
+    foreach ($this->paginator as $row) {
+	echo "<span class='view'>\n";
+        $name = '<strong>' . $row->tkt_title . '</strong> -  ' . $row->tkt_status ;
+        echo "<a href='/tickets/view/" . $row->id . "'>$name</a><br>";
+	echo "</span>\n";
+    }
+    ?>
+    <div class='clear'></div>
+    <?php echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml') ?>
 </div>

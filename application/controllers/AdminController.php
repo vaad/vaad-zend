@@ -6,6 +6,8 @@ class AdminController extends Vaad_Controller_Action {
         parent::preDispatch(false);
         $menu = array(
             'transactions' => "/transactions",
+            'incomes' => "/incomes",
+            'deposit' => "/deposit",
         );
 
         $this->view->menu = $menu;

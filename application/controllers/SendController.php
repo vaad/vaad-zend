@@ -1,6 +1,6 @@
 <?php
 
-class SendController extends Vaad_Controller_Action
+class SendController extends Zend_Controller_Action
 {
 
     public function init()

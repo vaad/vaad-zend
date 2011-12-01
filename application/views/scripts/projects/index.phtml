@@ -1,8 +1,8 @@
 <div id="view-content">
     <?php
     foreach ($this->paginator as $row) {
-	echo "<span class='postit view'>\n";
-        $name = $row->prj_title ;
+	echo "<span class='view'>\n";
+        $name = '<strong>' . $row->prj_title . '</strong> -  ' . $row->prj_desc ;
         echo "<a href='/projects/view/" . $row->id . "'>$name</a><br>";
 	echo "</span>\n";
     }

@@ -13,6 +13,7 @@ class Vaad_Controller_Action extends Zend_Controller_Action {
     protected $_new = 'הוספת';
     protected $_detail = 'פרטי';
     protected $tbl;
+    protected $select = null;
     protected $form;
 
     private function isVaad() {
@@ -80,7 +81,7 @@ class Vaad_Controller_Action extends Zend_Controller_Action {
 
     public function indexAction() {
 
-        $this->view->rows = $this->tbl->fetchAll(null);
+        $this->view->rows = $this->tbl->fetchAll($this->select);
 
         $page = $this->getPage();
         $this->setPaginator($this->view->rows);
