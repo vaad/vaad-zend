@@ -1,6 +1,7 @@
 <?php
 
 return array(
+    'Page not found' => 'הדף המבוקש לא נמצא',
     'new' => 'צור חדש',
     'list' => 'רשימה',
     'edit' => 'עדכון',

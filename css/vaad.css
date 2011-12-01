@@ -7,6 +7,10 @@ body {
     direction: rtl;
 }
 
+.ltr {
+    direction: ltr;
+    text-align: left;
+}
 .main-page {
     background : url(/images/body.jpg) repeat-y;
 }
