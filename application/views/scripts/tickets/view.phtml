@@ -1,8 +1,11 @@
 <div class='form-header' id="view-content">
     <br /><br />
     <?php echo $this->form; ?>
+    
+    <?php echo $this->histForm; ?>
     <div class="messages">
-        <?php foreach (Zend_Controller_Action_HelperBroker::getStaticHelper("flashMessenger")
+        <?php
+        foreach (Zend_Controller_Action_HelperBroker::getStaticHelper("flashMessenger")
                 ->getMessages() as $message) :
             ?>
             <p><?php echo $this->escape($message); ?></p>

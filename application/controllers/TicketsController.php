@@ -9,6 +9,7 @@ class TicketsController extends Vaad_Controller_Action {
         $this->select->order('tkt_opendate desc');
 
         $this->form = new Vaad_Form_Ticket();
+        $this->view->histForm = new Vaad_Form_TicketHistor();
         $this->_name = 'תקלות';
     }
 
