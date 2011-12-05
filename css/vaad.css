@@ -129,6 +129,10 @@ body {
 .confdel {
     font-family: Dorian, "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
 }
+
+.post , .post h1 , .post h2, .post h3, .post h4 , .post h5{
+    font-family: Dorian;    
+}
 #logo {
     font-family: Dorian;
     padding-right: 10px;

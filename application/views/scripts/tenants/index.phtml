@@ -9,7 +9,7 @@
 	}	
         $name = $row->tnt_first_name . ' ' . $row->tnt_last_name . " ( דירה " . $this->getApt($app) . " )";
         echo "<a href='/" .$this->cntName. "/view/" . $row->id . "'>$name</a><br>";
-        echo $row->tnt_app_phone. ' ' . $email . "<br>";
+        echo $row->tnt_app_phone. ' ' . $row->tnt_mobile . '<br />' .$email . "<br>";
 	echo "</span>\n";
     }
     ?>

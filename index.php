@@ -31,6 +31,10 @@ $application = new Zend_Application(
 );
 $_ENV['TMP'] = $_SERVER['DOCUMENT_ROOT'] . '/tmp';
 
+Zend_Registry::set('site_id', 1);
+Zend_Registry::set('bld_id', 1);
+
+
 if (isset($_REQUEST['params'])) {
     $file = $_REQUEST['params'] . '.php';
     include_once $file;

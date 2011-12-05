@@ -1,58 +1,15 @@
 <?php
 
-class PostsController extends Vaad_Controller_Action
-{
-    
-    public function init()
-    {
-        $this->view->topPageTitle = 'הודעות וועד/פוסטים';
-    }
+class PostsController extends Vaad_Controller_Action {
 
-    public function indexAction()
-    {
-        $tbl = new Vaad_DbTable_Posts();
-        $this->view->rows = $tbl->fetchAll(null,'create_time Desc');
-        
-        $page = $this->getPage();
-        $this->setPaginator($this->view->rows);
-        
+    public function init() {
+        $this->tbl = new Vaad_DbTable_Posts();
+        $this->select = $this->tbl->select();
+        $this->select->order('update_time Desc');
+        $this->select->order('title');
+        $this->form = new Vaad_Form_Post();
+        $this->_name = 'הודעות וועד/פוסטים';
     }
-
-    public function createAction()
-    {
-        $tbl = new Vaad_DbTable_Posts();        
-    }
-
-    public function listAction()
-    {
-        // action body
-    }
-
-    public function viewAction()
-    {
-        // action body
-    }
-
-    public function deleteAction()
-    {
-        // action body
-    }
-
-    public function editAction()
-    {
-        // action body
-    }
-
 
 }
-
-
-
-
-
-
-
-
-
-
 

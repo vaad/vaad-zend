@@ -1,53 +1,14 @@
 <?php
 
-class ForumsController extends Vaad_Controller_Action
-{
+class ForumsController extends Vaad_Controller_Action {
 
-    public function init()
-    {
-        /* Initialize action controller here */
+    public function init() {
+        $this->tbl = new Vaad_DbTable_Forums();
+        $this->select = $this->tbl->select();
+        $this->select->order('forum_name');
+        $this->form = new Vaad_Form_Forum();
+        $this->_name = ' פורומים';
     }
-
-    public function indexAction()
-    {
-        // action body
-    }
-
-    public function createAction()
-    {
-        // action body
-    }
-
-    public function listAction()
-    {
-        // action body
-    }
-
-    public function viewAction()
-    {
-        // action body
-    }
-
-    public function deleteAction()
-    {
-        // action body
-    }
-
-    public function editAction()
-    {
-        // action body
-    }
-
 
 }
-
-
-
-
-
-
-
-
-
-
 

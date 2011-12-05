@@ -32,13 +32,22 @@
 	$adding_comments = $this->createElement('checkbox', 'adding_comments', array('size' => 17, 'label' => 'adding_comments'));
 	$adding_comments->setRequired(true);
 	$this->addElement($adding_comments);
-$save = new Zend_Form_Element_Submit('save');
+$confdel = new Zend_Form_Element_Checkbox('confdel');
+$confdel->setDescription('<span class="confdel">אישור מחיקה</span>')
+->setDecorators(array(
+'ViewHelper',
+array('Description', array('escape' => false, 'tag' => false)),
+'Errors',
+));
+$this->addElement($confdel);
+
+$save = new Zend_Form_Element_Submit('save', array('class' => 'button'));
 $this->addElement($save);
-$back = new Zend_Form_Element_Submit('back');
+$back = new Zend_Form_Element_Submit('back', array('class' => 'button'));
 $this->addElement($back);
-$repeat = new Zend_Form_Element_Submit('repeat');
+$repeat = new Zend_Form_Element_Submit('repeat', array('class' => 'button'));
 $this->addElement($repeat);
-$delete = new Zend_Form_Element_Submit('delete');
+$delete = new Zend_Form_Element_Submit('delete', array('class' => 'button'));
 $this->addElement($delete);
 $id->setDecorators(array('ViewHelper'));
 $bld_id->setDecorators(array('ViewHelper'));
@@ -54,7 +63,7 @@ $this->addDisplayGroups(array(
  'elements' => array('update_time','forum_id','adding_comments'),
 ),
  'bottom' => array(
- 'elements' => array('id','bld_id','save','back','repeat','delete'),
+ 'elements' => array('id','bld_id','save','back','repeat','delete','confdel'),
 ),
 ));
  

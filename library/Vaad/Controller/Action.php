@@ -93,6 +93,7 @@ class Vaad_Controller_Action extends Zend_Controller_Action {
 
     public function viewAction($save = false) {
         $id = $this->getRequest()->getParam('id');
+        if ($this->isVaad()) $save = true;
 
         if ($this->_request->getPost()) {
             $formData = $this->_request->getPost();

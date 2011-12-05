@@ -66,6 +66,7 @@ class Vaad_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract {
         $acl->allow('vaad', 'incomes', null);
         $acl->allow('vaad', 'accounts', null);
         $acl->allow('vaad', 'deposit', null);
+        $acl->allow('vaad', 'forums', null);
 
         $acl->allow('vaad', 'admin', null); // Vaad can do admin process
 

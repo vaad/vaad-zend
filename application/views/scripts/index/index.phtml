@@ -1,30 +1,30 @@
-<div id="welcome">
-    <h1>Welcome to the <span id="zf-name">Zend Framework! asledfjklsdfklsjdf sdjf lksdjf skldfj lskd</span></h1>
-    skjdhfjkshd fkjshdf skjdfh skdfh skjdfh skjdfh skdfh sdkfhs dkfjhs dfjkhs dfkjshd kjsdhf ksjdfh skjdh
-    skjdhfjkshd fkjshdf skjdfh skdfh skjdfh skjdfh skdfh sdkfhs dkfjhs dfjkhs dfkjshd kjsdhf ksjdfh skjdh
-    skjdhfjkshd fkjshdf skjdfh skdfh skjdfh skjdfh skdfh sdkfhs dkfjhs dfjkhs dfkjshd kjsdhf ksjdfh skjdh
-    skjdhfjkshd fkjshdf skjdfh skdfh skjdfh skjdfh skdfh sdkfhs dkfjhs dfjkhs dfkjshd kjsdhf ksjdfh skjdh
-    skjdhfjkshd fkjshdf skjdfh skdfh skjdfh skjdfh skdfh sdkfhs dkfjhs dfjkhs dfkjshd kjsdhf ksjdfh skjdh
-    skjdhfjkshd fkjshdf skjdfh skdfh skjdfh skjdfh skdfh sdkfhs dkfjhs dfjkhs dfkjshd kjsdhf ksjdfh skjdh
-    skjdhfjkshd fkjshdf skjdfh skdfh skjdfh skjdfh skdfh sdkfhs dkfjhs dfjkhs dfkjshd kjsdhf ksjdfh skjdh
-    skjdhfjkshd fkjshdf skjdfh skdfh skjdfh skjdfh skdfh sdkfhs dkfjhs dfjkhs dfkjshd kjsdhf ksjdfh skjdh
-    skjdhfjkshd fkjshdf skjdfh skdfh skjdfh skjdfh skdfh sdkfhs dkfjhs dfjkhs dfkjshd kjsdhf ksjdfh skjdh
-    skjdhfjkshd fkjshdf skjdfh skdfh skjdfh skjdfh skdfh sdkfhs dkfjhs dfjkhs dfkjshd kjsdhf ksjdfh skjdh
-    skjdhfjkshd fkjshdf skjdfh skdfh skjdfh skjdfh skdfh sdkfhs dkfjhs dfjkhs dfkjshd kjsdhf ksjdfh skjdh
-    skjdhfjkshd fkjshdf skjdfh skdfh skjdfh skjdfh skdfh sdkfhs dkfjhs dfjkhs dfkjshd kjsdhf ksjdfh skjdh
+<?php
+$idx = 0;
+foreach ($this->posts as $row) {
+    $idx++;
+    ?>
 
-    skjdhfjkshd fkjshdf skjdfh skdfh skjdfh skjdfh skdfh sdkfhs dkfjhs dfjkhs dfkjshd kjsdhf ksjdfh skjdh
-    skjdhfjkshd fkjshdf skjdfh skdfh skjdfh skjdfh skdfh sdkfhs dkfjhs dfjkhs dfkjshd kjsdhf ksjdfh skjdh
-    skjdhfjkshd fkjshdf skjdfh skdfh skjdfh skjdfh skdfh sdkfhs dkfjhs dfjkhs dfkjshd kjsdhf ksjdfh skjdh
-    skjdhfjkshd fkjshdf skjdfh skdfh skjdfh skjdfh skdfh sdkfhs dkfjhs dfjkhs dfkjshd kjsdhf ksjdfh skjdh
-    skjdhfjkshd fkjshdf skjdfh skdfh skjdfh skjdfh skdfh sdkfhs dkfjhs dfjkhs dfkjshd kjsdhf ksjdfh skjdh
+    <?php if ($idx == 1) { ?>
+        <div class='post' id="welcome">
+            <h2><?php echo $row->title; ?></h2>
+            <?php echo $row->content_txt; ?>
+        </div>
+<hr>
+    <?php } ?>
 
+    <?php if ($idx == 2) { ?>
+        <div class='post column'>
+            <h3><?php echo $row->title; ?></h3>
+            <div class="span-9  right"> <?php echo $row->content_txt; ?></div>
+        </div>
+    <?php } ?>
 
-</div>
+    <?php if ($idx == 3) { ?>
+        <div class='post column last'>
+            <h3><?php echo $row->title; ?></h3>
+            <div class="span-9  left"> <?php echo $row->content_txt; ?></div>
+        </div>
+    <?php } ?>
 
-<div class="span-19 last break"> <hr> </div>
-<div class="span-9 showgrid left"> 
-    fff
-</div>
-<div class="span-9 showgrid right"> kldfjksdjfsldjf sd</div>
+<?php } ?>
 

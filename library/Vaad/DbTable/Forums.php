@@ -1,6 +1,6 @@
 <?php
-class Vaad_DbTable_Contacts extends Vaad_DbTable_Abstract {
-    protected $_name = 'contacts';
+class Vaad_DbTable_Forums extends Vaad_DbTable_Abstract {
+    protected $_name = 'forums';
 }
 
 ?>
