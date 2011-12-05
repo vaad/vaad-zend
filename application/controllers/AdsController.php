@@ -40,14 +40,3 @@ class AdsController extends Vaad_Controller_Action
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
