@@ -25,9 +25,11 @@ class AuthController extends Zend_Controller_Action {
             if ($this->isValid($_POST)) {
                 $data = $_POST;
                 $db = Zend_Db_Table::getDefaultAdapter();
-                $authAdapter = new Zend_Auth_Adapter_DbTable($db, 'tenants', 'tnt_email', 'tnt_password');
+                $bld_id = Zend_Registry::get('bld_id');
+                $authAdapter = new Zend_Auth_Adapter_DbTable($db, 'tenants', 'tnt_email', 'tnt_password', "? and (bld_id = $bld_id)");
                 $authAdapter->setIdentity($data['email']);
                 $authAdapter->setCredential(md5($data['password']));
+                $authAdapter->setCredentialTreatment("? and (bld_id = $bld_id)");
                 $result = $authAdapter->authenticate();
                 if ($result->isValid()) {
                     $uData = $authAdapter->getResultRowObject(

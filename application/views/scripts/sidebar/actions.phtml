@@ -9,4 +9,14 @@
         }
     ?>
 </ul>
+<?php if (($this->action == 'index') and (isset($this->searchForm))): ?>
+<h4><?php echo $translator->_('Search'); ?></h4>
+<ul class="action_search">
+
+    <?php
+    echo $this->searchForm;
+    ?>
+<?php    endif; ?>
+</ul>
+
 <?php $this->placeholder('sidebar')->captureEnd() ?>

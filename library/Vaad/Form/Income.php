@@ -9,7 +9,7 @@ class Vaad_Form_Income extends ZendX_JQuery_Form {
         $this->addElement($id);
         $bld_id = $this->createElement('hidden', 'bld_id');
         $this->addElement($bld_id);
-        
+
         $prj_id = $this->createElement('select', 'prj_id', array('size' => 1, 'label' => 'prj_id'));
         $prj_tbl = new Vaad_DbTable_Projects();
         $prj_rows = $prj_tbl->getAll();
@@ -17,7 +17,7 @@ class Vaad_Form_Income extends ZendX_JQuery_Form {
             $prj_id->addMultiOption($row->id, $row->prj_title);
         }
         $prj_id->setRequired(true);
-        
+
         $this->addElement($prj_id);
         $inc_date = new ZendX_JQuery_Form_Element_DatePicker('inc_date');
         $inc_date->setJQueryParams(array('dateFormat' => 'dd/mm/yy', 'timeFormat' => 'hh:mm:ss'));
@@ -39,15 +39,15 @@ class Vaad_Form_Income extends ZendX_JQuery_Form {
         $inc_chk_date->setJQueryParams(array('dateFormat' => 'dd/mm/yy', 'timeFormat' => 'hh:mm:ss'));
         $inc_chk_date->setAttrib('size', '10')->setLabel('inc_chk_date')->setValue(date('d/m/Y H:i:s'));
         $this->addElement($inc_chk_date);
-        
+
         $inc_apt_num = $this->createElement('select', 'inc_apt_num', array('size' => 1, 'label' => 'inc_apt_num'));
         $tbl = new Vaad_DbTable_Appartments();
         $rows = $tbl->fetchAll();
         foreach ($rows as $row) {
-           $inc_apt_num->addMultiOption($row->id, $row->app_num); 
+            $inc_apt_num->addMultiOption($row->id, $row->app_num);
         }
         $this->addElement($inc_apt_num);
-        
+
         $inc_bank = $this->createElement('select', 'inc_bank', array('size' => 1, 'label' => 'inc_bank'));
 
         $bnk_tbl = new Vaad_DbTable_BankCodes();
@@ -57,13 +57,13 @@ class Vaad_Form_Income extends ZendX_JQuery_Form {
         }
         $inc_bank->setRequired(true);
         $this->addElement($inc_bank);
-        $save = new Zend_Form_Element_Submit('save');
+        $save = new Zend_Form_Element_Submit('save', array('class' => 'button'));
         $this->addElement($save);
-        $back = new Zend_Form_Element_Submit('back');
+        $back = new Zend_Form_Element_Submit('back', array('class' => 'button'));
         $this->addElement($back);
-        $repeat = new Zend_Form_Element_Submit('repeat');
+        $repeat = new Zend_Form_Element_Submit('repeat', array('class' => 'button'));
         $this->addElement($repeat);
-        $delete = new Zend_Form_Element_Submit('delete');
+        $delete = new Zend_Form_Element_Submit('delete', array('class' => 'button'));
         $this->addElement($delete);
         $id->setDecorators(array('ViewHelper'));
         $bld_id->setDecorators(array('ViewHelper'));
@@ -73,10 +73,10 @@ class Vaad_Form_Income extends ZendX_JQuery_Form {
         $delete->setDecorators(array('ViewHelper'));
         $this->addDisplayGroups(array(
             'right' => array(
-                'elements' => array('prj_id','inc_apt_num', 'inc_date', 'inc_until_date', ),
+                'elements' => array('prj_id', 'inc_apt_num', 'inc_date', 'inc_until_date',),
             ),
             'left' => array(
-                'elements' => array('inc_amount', 'inc_chk_date','inc_bank', 'inc_branch', 'inc_chk_no' ),
+                'elements' => array('inc_amount', 'inc_chk_date', 'inc_bank', 'inc_branch', 'inc_chk_no'),
             ),
             'bottom' => array(
                 'elements' => array('id', 'bld_id', 'save', 'back', 'repeat', 'delete'),

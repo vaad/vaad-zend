@@ -15,6 +15,7 @@ class Vaad_Controller_Action extends Zend_Controller_Action {
     protected $tbl;
     protected $select = null;
     protected $form;
+    protected $searchForm = '';
 
     private function isVaad() {
         $auth = Zend_Auth::getInstance();
@@ -35,23 +36,27 @@ class Vaad_Controller_Action extends Zend_Controller_Action {
 
         $this->_control = $cnt;
         $this->_action = $act;
+        $this->view->action = $act;
 
         $ucnt = str_replace(' ', '', ucwords(str_replace('_', ' ', $cnt)));
         $this->view->topPageTitle = $translator->_($ucnt);
         $this->view->mainMenuTitle = $translator->_($ucnt);
+
+        $acl = new Vaad_Controller_Plugin_Acl();
+        $identity = Zend_Auth::getInstance()->getIdentity();
 
         $this->view->cntName = $cnt;
         if ($withmenu) {
             $menu = array(
                 'list' => "/$cnt/index",
             );
-            if ($this->isVaad() and ($act != 'create')) {
+            if ($acl->isAllowed($identity->role, $cnt, 'create') and ($act != 'create')) {
                 $menu['new'] = "/$cnt/create";
             }
 
             $id = $this->getRequest()->getParam('id');
             if ((int) $id > 0) {
-                if ($this->isVaad() && ($act != 'edit')) {
+                if ($acl->isAllowed($identity->role, $cnt, 'edit') && ($act != 'edit')) {
                     $menu['edit'] = "/$cnt/edit/$id";
                 }
                 if ($act != 'view')
@@ -61,6 +66,11 @@ class Vaad_Controller_Action extends Zend_Controller_Action {
             $this->view->menu = $menu;
             $this->view->render('sidebar/actions.phtml');
         }
+    }
+
+    public function setSearchForm($frm) {
+        $this->searchForm = $frm;
+        $this->view->searchForm = $frm;
     }
 
     protected function getPage() {
@@ -81,6 +91,16 @@ class Vaad_Controller_Action extends Zend_Controller_Action {
 
     public function indexAction() {
 
+        if ($this->_request->getPost()) {
+            $formData = $this->_request->getPost();
+            foreach ($formData as $k => $v) {
+                if ($k != 'search') {
+                    if (!empty($v)) {
+                        $this->select->where("$k = '$v'");
+                    }
+                }
+            }
+        }
         $this->view->rows = $this->tbl->fetchAll($this->select);
 
         $page = $this->getPage();
@@ -93,7 +113,8 @@ class Vaad_Controller_Action extends Zend_Controller_Action {
 
     public function viewAction($save = false) {
         $id = $this->getRequest()->getParam('id');
-        if ($this->isVaad()) $save = true;
+        if ($this->isVaad())
+            $save = true;
 
         if ($this->_request->getPost()) {
             $formData = $this->_request->getPost();

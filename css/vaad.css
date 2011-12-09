@@ -234,6 +234,28 @@ label {
     padding-bottom: 10px;
 }
 
+form .action_search {
+    background: transparent;
+    padding: 0px;
+}
+
+.action_search .zend_form {
+    background: transparent;
+    padding: 0px;
+    margin: 0px;
+}
+
+.action_search label{
+    float: none;
+}
+
+ul.action_search, ol.action_search , dd.action_search{
+    margin: 0;
+    padding:0;
+    margin-right: 0;
+}
+
+
 .submit {
     background : transparent;
     border : 0px none;

@@ -9,6 +9,8 @@ return array(
     'delete' => 'מחיקה',
     'view' => 'הצגת פרטים',
     'All' => 'הכל',
+    'search' => 'חפש',
+    'Search' => 'חיפוש',
     'Apply Filter' => 'סנן',
     'Remove Filters' => 'הסר סינון',
     'Remove Order' => 'הסר מיון',

@@ -8,6 +8,9 @@ class TenantsController extends Vaad_Controller_Action {
         $this->select->order('tnt_app_num');
 
         $this->form = new Vaad_Form_Tenant();
+        
+        $this->setSearchForm(new Vaad_Form_TenantSearch);
+        
         $this->_name = 'דייר';
     }
 

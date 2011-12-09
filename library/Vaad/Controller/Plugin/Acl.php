@@ -2,8 +2,17 @@
 
 class Vaad_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract {
 
-    public function preDispatch(Zend_Controller_Request_Abstract $request) {
-        $acl = new Zend_Acl;
+    protected $_acl = null;
+
+    public function isAllowed($role, $controller, $action) {
+        if ($this->_acl == null) {
+            $this->_acl = new Zend_Acl ();
+            $this->_setRole($this->_acl);
+        }
+        return $this->_acl->isAllowed($role, $controller, $action);
+    }
+
+    private function _setRole($acl) {
         $acl->addRole(new Zend_Acl_Role('guest'));
         $acl->addRole(new Zend_Acl_Role('tenant'), 'guest');
         $acl->addRole(new Zend_Acl_Role('vaad'), 'tenant');
@@ -28,10 +37,11 @@ class Vaad_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract {
         $acl->add(new Zend_Acl_Resource('tasks'));
         $acl->add(new Zend_Acl_Resource('forums'));
         $acl->add(new Zend_Acl_Resource('transactions'));
-        $acl->add(new Zend_Acl_Resource('incomes'));      
+        $acl->add(new Zend_Acl_Resource('incomes'));
         $acl->add(new Zend_Acl_Resource('send'));
         $acl->add(new Zend_Acl_Resource('accounts'));
         $acl->add(new Zend_Acl_Resource('deposit'));
+        $acl->add(new Zend_Acl_Resource('buildings'));
 
         $acl->allow('guest', 'auth', array('login', 'thankyou'));
         $acl->allow('guest', 'auth', array('register'));
@@ -43,7 +53,7 @@ class Vaad_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract {
 
         $acl->allow('tenant', 'auth', array('logout'));
         $acl->allow('tenant', 'tenants', array('index', 'view', 'astable'));
-        $acl->allow('tenant', 'tickets', array('index', 'edit', 'view', 'add'));
+        $acl->allow('tenant', 'tickets', array('index', 'edit', 'view', 'create'));
         $acl->allow('tenant', 'contacts', array('index', 'view', 'astable'));
         $acl->allow('tenant', 'posts', array('index'));
         $acl->allow('tenant', 'projects', array('index', 'view'));
@@ -67,6 +77,7 @@ class Vaad_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract {
         $acl->allow('vaad', 'accounts', null);
         $acl->allow('vaad', 'deposit', null);
         $acl->allow('vaad', 'forums', null);
+        $acl->allow('vaad', 'buildings', null);
 
         $acl->allow('vaad', 'admin', null); // Vaad can do admin process
 
@@ -83,6 +94,15 @@ class Vaad_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract {
             $role = 'guest';
         }
 
+        return $role;
+    }
+
+    public function preDispatch(Zend_Controller_Request_Abstract $request) {
+        $acl = new Zend_Acl;
+        $this->_acl = $acl;
+        $role = $this->_setRole($acl);
+
+
         $controller = $request->controller;
         $action = $request->action;
         Zend_Registry::set('controller', ucfirst($controller));
@@ -91,20 +111,12 @@ class Vaad_Controller_Plugin_Acl extends Zend_Controller_Plugin_Abstract {
         Zend_Registry::set('IsAllow', $all);
 
 
-        /*
-          $this->getResponse()
-          ->appendBody("<p> [$role] [$all] [$controller] [$action]</p>\n");
-          foreach ($_POST as $k => $v) {
-          $this->getResponse()
-          ->appendBody("<p> [$k] [$v] [$role] </p>\n");
-          }
-         */
         if (!$acl->isAllowed($role, $controller, $action)) {
+            $testSpace = new Zend_Session_Namespace('testSpace');
+            $testSpace->setExpirationSeconds(7 * 24 * 60 * 60);
+            $testSpace->__set('controller', $controller);
+            $testSpace->__set('action', $action);
             if ($role == 'guest') {
-                $testSpace = new Zend_Session_Namespace('testSpace');
-                $testSpace->setExpirationSeconds(7*24*60*60);
-                $testSpace->__set('controller', $controller);
-                $testSpace->__set('action', $action);
                 $request->setControllerName('auth');
                 $request->setActionName('login');
             } else {
